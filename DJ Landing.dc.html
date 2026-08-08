@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/nocturne-9e178887-554d-4287-a384-44edf6efd93b/styles.css">
+<script src="_ds/nocturne-9e178887-554d-4287-a384-44edf6efd93b/_ds_bundle.js"></script>
+<script src="./image-slot.js"></script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@200;300;400;500;700&display=swap">
+<style>
+  body { margin: 0; background: #161826; overflow-x: hidden; font-family: "Heebo", var(--font-body); }
+  a { color: var(--color-accent); text-decoration: none; }
+  a:hover { color: var(--color-accent-300); }
+  ::selection { background: color-mix(in srgb, #9184d9 35%, transparent); }
+  input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible, a:focus-visible {
+    outline: 2px solid #9184d9; outline-offset: 2px; }
+  input[type="checkbox"] { accent-color: #9184d9; width: 15px; height: 15px; margin: 0; }
+  input, select, textarea, button { font-family: "Heebo", var(--font-body); }
+  @keyframes beam {
+    0%   { transform: translate3d(-6%,0,0) rotate(11deg); opacity: .30 }
+    50%  { transform: translate3d(6%,0,0) rotate(15deg);  opacity: .62 }
+    100% { transform: translate3d(-6%,0,0) rotate(11deg); opacity: .30 }
+  }
+  @keyframes eq { 0%,100% { transform: scaleY(.25) } 50% { transform: scaleY(1) } }
+  @keyframes drift { 0% { opacity: .5 } 50% { opacity: 1 } 100% { opacity: .5 } }
+  @keyframes ring { 0% { transform:scale(.45); opacity:.85 } 70% { opacity:0 } 100% { transform:scale(1.35); opacity:0 } }
+  @keyframes pulse { 0%,100% { transform:scale(1); opacity:1 } 50% { transform:scale(.72); opacity:.72 } }
+  @keyframes cue { 0%,100% { transform: translateY(0); opacity: .45 } 50% { transform: translateY(7px); opacity: 1 } }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important } }
+</style>
+</helmet>
+
+<div dir="rtl" style="font-family:'Heebo',var(--font-body); color:#e9e9ed; background:radial-gradient(1200px 760px at 18% -180px, color-mix(in srgb, #2b2741 78%, transparent), transparent 62%), radial-gradient(1100px 800px at 108% 92%, color-mix(in srgb, black 34%, transparent), transparent 56%), #161826; min-height:100vh; letter-spacing:0">
+
+  <nav style="position:sticky; top:0; z-index:60; display:flex; align-items:center; gap:28px; padding:0 clamp(20px,5vw,72px); height:64px; background:color-mix(in srgb, #161826 78%, transparent); backdrop-filter:blur(14px); border-bottom:1px solid color-mix(in srgb, #e9e9ed 10%, transparent)">
+    <a href="#top" aria-label="DJ Overflow — לראש הדף" style="display:flex; align-items:center; gap:11px; color:#e9e9ed">
+      <span aria-hidden="true" style="position:relative; display:grid; place-items:center; width:26px; height:26px">
+        <span style="position:absolute; width:26px; height:26px; border:1px solid #9184d9; border-radius:999px; animation:ring 2.6s cubic-bezier(.25,.6,.2,1) infinite"></span>
+        <span style="position:absolute; width:26px; height:26px; border:1px solid #796cbf; border-radius:999px; animation:ring 2.6s cubic-bezier(.25,.6,.2,1) .85s infinite"></span>
+        <span style="position:absolute; width:26px; height:26px; border:1px solid #5d5294; border-radius:999px; animation:ring 2.6s cubic-bezier(.25,.6,.2,1) 1.7s infinite"></span>
+        <span style="position:relative; width:7px; height:7px; border-radius:999px; background:#b5abfc; animation:pulse 1.3s ease-in-out infinite"></span>
+      </span>
+      <span style="display:grid; gap:3px; font-family:'Heebo',var(--font-heading); text-transform:uppercase; white-space:nowrap">
+        <span style="font-weight:200; font-size:9.5px; letter-spacing:.42em; line-height:1; color:color-mix(in srgb,#e9e9ed 55%, transparent)">DJ</span>
+        <span style="position:relative; font-weight:500; font-size:15px; letter-spacing:.2em; line-height:1">Overflow<span style="position:absolute; inset-inline:0; bottom:-5px; height:1px; background:linear-gradient(to left, color-mix(in srgb,#9184d9 0%, transparent), #9184d9 45%, color-mix(in srgb,#9184d9 0%, transparent))"></span></span>
+      </span>
+    </a>
+    <div style="display:flex; align-items:center; gap:22px; margin-inline-start:auto; font-size:13.5px; font-weight:300; color:color-mix(in srgb, #e9e9ed 72%, transparent)">
+      <a href="#about" style="color:inherit">אודות</a>
+      <a href="#events" style="color:inherit">סוגי אירועים</a>
+      <a href="#sets" style="color:inherit">סטים</a>
+      <a href="#gallery" style="color:inherit">גלריה</a>
+      <a href="#words" style="color:inherit">המלצות</a>
+      <button type="button" onClick="{{ openForm }}" style="font-family:inherit; font-size:13px; font-weight:400; letter-spacing:.04em; padding:8px 18px; color:#c9c2f2; background:transparent; border:1px solid color-mix(in srgb, #9184d9 62%, transparent); border-radius:8px; cursor:pointer; transition:background .18s ease, color .18s ease" style-hover="background:color-mix(in srgb, #9184d9 16%, transparent); color:#e7e5fe">תיאום אירוע</button>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section id="top" style="position:relative; min-height:calc(100vh - 64px); display:grid; align-items:end; overflow:hidden; isolation:isolate">
+    <div data-depth="0.10" style="position:absolute; inset:-12% 0 -12% 0; z-index:0; will-change:transform">
+      <video src="uploads/kling_20260808_VIDEO_Create_a_s_5589_0.mp4" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" aria-hidden="true" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block"></video>
+    </div>
+    <div style="position:absolute; inset:0; z-index:1; pointer-events:none; background:linear-gradient(to top, #161826 4%, color-mix(in srgb,#161826 72%, transparent) 42%, color-mix(in srgb,#161826 30%, transparent) 100%)"></div>
+    <div style="position:absolute; top:-30%; left:12%; width:190px; height:150%; z-index:1; pointer-events:none; background:linear-gradient(to bottom, color-mix(in srgb,#b5abfc 26%, transparent), transparent 78%); filter:blur(28px); animation:beam 13s ease-in-out infinite"></div>
+    <div style="position:absolute; top:-30%; left:38%; width:120px; height:150%; z-index:1; pointer-events:none; background:linear-gradient(to bottom, color-mix(in srgb,#9184d9 20%, transparent), transparent 72%); filter:blur(22px); animation:beam 17s ease-in-out infinite reverse"></div>
+
+    <div style="position:relative; z-index:2; width:100%; max-width:1200px; margin:0 auto; padding:0 clamp(20px,5vw,72px) clamp(56px,9vh,104px)">
+      <p style="display:flex; align-items:center; gap:14px; margin:0 0 22px; font-size:12.5px; font-weight:400; letter-spacing:.18em; text-transform:uppercase; color:#9184d9; font-feature-settings:'tnum' 1">
+        <span style="display:block; width:44px; height:1px; background:#9184d9"></span>
+        DJ &middot; מפיק מוזיקלי &middot; ישראל
+      </p>
+      <h1 style="font-family:'Heebo',var(--font-heading); font-weight:300; font-size:clamp(42px,6.6vw,92px); line-height:1.06; letter-spacing:-.02em; margin:0; max-width:20ch; text-wrap:balance">
+        <span style="display:block">הלילה שלכם,</span>
+        <span style="display:block; font-weight:500">מסודר עד הביט האחרון.</span>
+      </h1>
+      <p style="margin:26px 0 0; max-width:52ch; font-size:16.5px; font-weight:300; line-height:1.7; color:color-mix(in srgb, #e9e9ed 82%, transparent)">
+        סאונד נקי, מעברים שקטים ורצפה שקוראת נכון את החדר. חתונות, בר ובת מצווה, אירועי חברה, מסיבות פרטיות, מועדונים ופסטיבלים — סט אחד שנבנה סביב האירוע שלכם, לא סביב פלייליסט מוכן.
+      </p>
+      <div style="display:flex; flex-wrap:wrap; align-items:center; gap:12px; margin-top:32px">
+        <button type="button" onClick="{{ openForm }}" style="font-family:inherit; font-size:14.5px; font-weight:400; letter-spacing:.03em; padding:13px 30px; color:#e7e5fe; background:color-mix(in srgb, #9184d9 12%, transparent); border:1px solid #9184d9; border-radius:8px; cursor:pointer; transition:background .18s ease" style-hover="background:color-mix(in srgb, #9184d9 26%, transparent)">להשארת פרטים לאירוע</button>
+        <a href="#sets" style="font-size:14.5px; font-weight:300; padding:13px 22px; color:color-mix(in srgb,#e9e9ed 80%, transparent); border:1px solid color-mix(in srgb,#e9e9ed 16%, transparent); border-radius:8px; transition:border-color .18s ease" style-hover="border-color:color-mix(in srgb,#e9e9ed 34%, transparent); color:#e9e9ed">להאזנה לסטים</a>
+        <div style="display:flex; align-items:flex-end; gap:3px; height:26px; margin-inline-start:10px">
+          <span style="display:block; width:2px; height:100%; background:#9184d9; transform-origin:bottom; animation:eq 1.1s ease-in-out infinite"></span>
+          <span style="display:block; width:2px; height:100%; background:#9184d9; transform-origin:bottom; animation:eq 1.4s ease-in-out .15s infinite"></span>
+          <span style="display:block; width:2px; height:100%; background:#796cbf; transform-origin:bottom; animation:eq .9s ease-in-out .3s infinite"></span>
+          <span style="display:block; width:2px; height:100%; background:#9184d9; transform-origin:bottom; animation:eq 1.6s ease-in-out .05s infinite"></span>
+          <span style="display:block; width:2px; height:100%; background:#5d5294; transform-origin:bottom; animation:eq 1.25s ease-in-out .4s infinite"></span>
+        </div>
+      </div>
+      <p style="margin:44px 0 0; font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; color:color-mix(in srgb,#e9e9ed 42%, transparent); animation:cue 2.6s ease-in-out infinite">גלול</p>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section id="about" style="max-width:1200px; margin:0 auto; padding:clamp(72px,11vh,132px) clamp(20px,5vw,72px) clamp(48px,7vh,88px); display:grid; grid-template-columns:minmax(0,7fr) minmax(0,5fr); gap:clamp(28px,5vw,80px); align-items:center">
+    <div data-reveal="1" style="opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease">
+      <p style="display:flex; align-items:center; gap:14px; margin:0 0 20px; font-size:12.5px; letter-spacing:.18em; text-transform:uppercase; color:#9184d9">
+        <span style="display:block; width:44px; height:1px; background:#9184d9"></span>אודות
+      </p>
+      <h2 style="font-family:'Heebo',var(--font-heading); font-weight:300; font-size:clamp(28px,3.4vw,42px); line-height:1.2; letter-spacing:-.015em; margin:0; max-width:26ch">
+        אני לא מנגן שירים. אני קורא את הרחבה.
+      </h2>
+      <p style="margin:24px 0 0; max-width:56ch; font-size:16px; font-weight:300; line-height:1.75; color:color-mix(in srgb,#e9e9ed 80%, transparent)">
+        שתים־עשרה שנים מאחורי הקונסולה, יותר משמונה מאות אירועים, ועדיין אותה עבודה: להבין מי עומד מולי בשלוש דקות הראשונות ולבנות משם. אני מגיע עם סאונד משלי, עושה סאונד־צ'ק לפני שהאורח הראשון נכנס, ומתאם מראש כל רגע שחייב לצאת מדויק — כניסה, ריקוד ראשון, שיא הערב.
+      </p>
+      <p style="margin:20px 0 0; max-width:56ch; font-size:16px; font-weight:300; line-height:1.75; color:color-mix(in srgb,#e9e9ed 66%, transparent)">
+        עובד עם מפיקים, אולמות וצוותי חברה בכל הארץ. הסט תמיד נבנה איתכם — הז'אנרים, השירים שחייבים, והשירים שבשום מצב לא.
+      </p>
+      <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:28px">
+        <span style="font-size:12.5px; font-weight:300; padding:6px 13px; border-radius:999px; color:#d2cefd; background:color-mix(in srgb,#9184d9 14%, transparent); border:1px solid color-mix(in srgb,#9184d9 30%, transparent)">סאונד ותאורה בהפקה עצמית</span>
+        <span style="font-size:12.5px; font-weight:300; padding:6px 13px; border-radius:999px; color:#d2cefd; background:color-mix(in srgb,#9184d9 14%, transparent); border:1px solid color-mix(in srgb,#9184d9 30%, transparent)">MC לפי בקשה</span>
+        <span style="font-size:12.5px; font-weight:300; padding:6px 13px; border-radius:999px; color:#d2cefd; background:color-mix(in srgb,#9184d9 14%, transparent); border:1px solid color-mix(in srgb,#9184d9 30%, transparent)">פריסה ארצית</span>
+      </div>
+    </div>
+    <figure data-depth="0.06" style="margin:0; position:relative; will-change:transform">
+      <div style="mix-blend-mode:lighten; border-radius:14px; overflow:hidden">
+        <image-slot id="dj-portrait" shape="rounded" radius="14" fit="cover" style="width:100%; aspect-ratio:4/5" placeholder="פורטרט — צולם על רקע כהה"></image-slot>
+      </div>
+    </figure>
+  </section>
+
+  <!-- ===== STAT BAND ===== -->
+  <section aria-label="במספרים" style="background:radial-gradient(900px 420px at 15% -40%, color-mix(in srgb,#353b80 68%, transparent), transparent 64%), #262a60">
+    <div style="max-width:1200px; margin:0 auto; padding:clamp(44px,7vh,80px) clamp(20px,5vw,72px); display:grid; grid-template-columns:repeat(4,auto); justify-content:space-between; gap:36px 28px">
+      <div>
+        <p style="font-family:'Heebo',var(--font-heading); font-weight:300; font-size:clamp(34px,3.6vw,52px); line-height:1.1; margin:0; color:#e9e9ed; font-feature-settings:'tnum' 1">800+</p>
+        <p style="margin:12px 0 0; font-size:12.5px; letter-spacing:.16em; text-transform:uppercase; color:color-mix(in srgb,#e9e9ed 66%, transparent)">אירועים</p>
+      </div>
+      <div>
+        <p style="font-family:'Heebo',var(--font-heading); font-weight:300; font-size:clamp(34px,3.6vw,52px); line-height:1.1; margin:0; color:#e9e9ed; font-feature-settings:'tnum' 1">12</p>
+        <p style="margin:12px 0 0; font-size:12.5px; letter-spacing:.16em; text-transform:uppercase; color:color-mix(in srgb,#e9e9ed 66%, transparent)">שנים על הבמה</p>
+      </div>
+      <div>
+        <p style="font-family:'Heebo',var(--font-heading); font-weight:300; font-size:clamp(34px,3.6vw,52px); line-height:1.1; margin:0; color:#e9e9ed; font-feature-settings:'tnum' 1">11</p>
+        <p style="margin:12px 0 0; font-size:12.5px; letter-spacing:.16em; text-transform:uppercase; color:color-mix(in srgb,#e9e9ed 66%, transparent)">ז'אנרים בסט</p>
+      </div>
+      <div>
+        <p style="font-family:'Heebo',var(--font-heading); font-weight:300; font-size:clamp(34px,3.6vw,52px); line-height:1.1; margin:0; color:#e9e9ed; font-feature-settings:'tnum' 1">24 שע'</p>
+        <p style="margin:12px 0 0; font-size:12.5px; letter-spacing:.16em; text-transform:uppercase; color:color-mix(in srgb,#e9e9ed 66%, transparent)">זמן חזרה לפנייה</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== EVENT TYPES ===== -->
+  <section id="events" style="max-width:1200px; margin:0 auto; padding:clamp(72px,11vh,124px) clamp(20px,5vw,72px) clamp(40px,6vh,72px)">
+    <p style="display:flex; align-items:center; gap:14px; margin:0 0 20px; font-size:12.5px; letter-spacing:.18em; text-transform:uppercase; color:#9184d9">
+      <span style="display:block; width:44px; height:1px; background:#9184d9"></span>סוגי אירועים
+    </p>
+    <h2 style="font-family:'Heebo',var(--font-heading); font-weight:300; font-size:clamp(26px,3.2vw,38px); line-height:1.22; letter-spacing:-.015em; margin:0 0 clamp(28px,4vh,48px); max-width:24ch">שש זירות, שש שפות מוזיקליות.</h2>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1px; background:color-mix(in srgb,#e9e9ed 10%, transparent)" data-comment-anchor="41257e7f74-div">
+      <article style="background:#161826; padding:30px 26px 34px; transition:background .22s ease" style-hover="background:color-mix(in srgb,#ff7a1f 20%, #161826)">
+        <p style="margin:0; font-size:12.5px; color:#9184d9; font-feature-settings:'tnum' 1">01</p>
+        <h3 style="font-family:'Heebo',var(--font-heading); font-weight:400; font-size:19px; margin:14px 0 0">חתונות</h3>
+        <p style="margin:12px 0 0; font-size:14.5px; font-weight:300; line-height:1.7; color:color-mix(in srgb,#e9e9ed 70%, transparent)">קבלת פנים, חופה, ריקוד ראשון והמסיבה — נבנים כרצף אחד עם לוח זמנים מדויק מול המפיק והאולם.</p>
+      </article>
+      <article style="background:#161826; padding:30px 26px 34px; transition:background .22s ease" style-hover="background:color-mix(in srgb,#ff7a1f 20%, #161826)">
+        <p style="margin:0; font-size:12.5px; color:#9184d9; font-feature-settings:'tnum' 1">02</p>
+        <h3 style="font-family:'Heebo',var(--font-heading); font-weight:400; font-size:19px; margin:14px 0 0">בר ובת מצווה</h3>
+        <p style="margin:12px 0 0; font-size:14.5px; font-weight:300; line-height:1.7; color:color-mix(in srgb,#e9e9ed 70%, transparent)">שני קהלים בחדר אחד. פלייליסט שנבנה עם החוגג עצמו, בלי לאבד את המבוגרים בדרך.</p>
+      </article>
+      <article style="background:#161826; padding:30px 26px 34px; transition:background .22s ease" style-hover="background:color-mix(in srgb,#ff7a1f 20%, #161826)">
+        <p style="margin:0; font-size:12.5px; color:#9184d9; font-feature-settings:'tnum' 1">03</p>
+        <h3 style="font-family:'Heebo',var(--font-heading); font-weight:400; font-size:19px; margin:14px 0 0">מסיבות פרטיות</h3>
+        <p style="margin:12px 0 0; font-size:14.5px; font-weight:300; line-height:1.7; color:color-mix(in srgb,#e9e9ed 70%, transparent)">גינה, גג, וילה. סט אינטימי שמתחיל בלאונג' ומגיע לאן שהחדר מוביל.</p>
+      </article>
+      <article style="background:#161826; padding:30px 26px 34px; transition:background .22s ease" style-hover="background:color-mix(in srgb,#ff7a1f 20%, #161826)">
+        <p style="margin:0; font-size:12.5px; color:#9184d9; font-feature-settings:'tnum' 1">04</p>
+        <h3 style="font-family:'Heebo',var(--font-heading); font-weight:400; font-size:19px; margin:14px 0 0">אירועי חברה</h3>
+        <p style="margin:12px 0 0; font-size:14.5px; font-weight:300; line-height:1.7; color:color-mix(in srgb,#e9e9ed 70%, transparent)">כנסים, ערבי סיכום ומסיבות סוף שנה — כולל מיתוג סאונד, מעברים לנאומים וסינון תכני מילים.</p>
+      </article>
+      <article style="background:#161826; padding:30px 26px 34px; transition:background .22s ease" style-hover="background:color-mix(in srgb,#ff7a1f 20%, #161826)">
+        <p style="margin:0; font-size:12.5px; color:#9184d9; font-feature-settings:'tnum' 1">05</p>
+        <h3 style="font-family:'Heebo',var(--font-heading); font-weight:400; font-size:19px; margin:14px 0 0">מועדונים</h3>
+        <p style="margin:12px 0 0; font-size:14.5px; font-weight:300; line-height:1.7; color:color-mix(in srgb,#e9e9ed 70%, transparent)">סטים ארוכים, מבוססי האוס וטכנו, שנבנים לפי שעת ההופעה ולא לפי להיטים.</p>
+      </article>
+      <article style="background:#161826; padding:30px 26px 34px; transition:background .22s ease" style-hover="background:color-mix(in srgb,#ff7a1f 20%, #161826)">
+        <p style="margin:0; font-size:12.5px; color:#9184d9; font-feature-settings:'tnum' 1">06</p>
+        <h3 style="font-family:'Heebo',var(--font-heading); font-weight:400; font-size:19px; margin:14px 0 0">פסטיבלים</h3>
+        <p style="margin:12px 0 0; font-size:14.5px; font-weight:300; line-height:1.7; color:color-mix(in srgb,#e9e9ed 70%, transparent)">עבודה מול צוותי הפקה ובמה, כולל תיאום טכני, שעות סאונד־צ'ק ורשימת דרישות מלאה.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== SETS ===== -->
+  <section id="sets" style="max-width:1200px; margin:0 auto; padding:clamp(56px,8vh,96px) clamp(20px,5vw,72px)">
+    <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:24px; flex-wrap:wrap; margin-bottom:clamp(24px,4vh,40px)">
+      <div>
+        <p style="display:flex; align-items:center; gap:14px; margin:0 0 20px; font-size:12.5px; letter-spacing:.18em; text-transform:uppercase; color:#9184d9">
+          <span style="display:block; width:44px; height:1px; background:#9184d9"></span>סטים לשמיעה
+        </p>
+        <h2 style="font-family:'Heebo',var(--font-heading); font-weight:300; font-size:clamp(26px,3.2vw,38px); line-height:1.22; letter-spacing:-.015em; margin:0">קחו דקה. תשמעו איך זה נשמע.</h2>
+      </div>
+      <a href="https://open.spotify.com" target="_blank" rel="noopener" style="font-size:13.5px; font-weight:300; padding:11px 20px; color:color-mix(in srgb,#e9e9ed 80%, transparent); border:1px solid color-mix(in srgb,#e9e9ed 16%, transparent); border-radius:8px; transition:border-color .18s ease" style-hover="border-color:color-mix(in srgb,#e9e9ed 34%, transparent); color:#e9e9ed">כל הסטים ב־Spotify</a>
+    </div>
+    <div style="display:grid; gap:1px; background:color-mix(in srgb,#e9e9ed 10%, transparent)">
+      <div style="display:grid; grid-template-columns:auto minmax(0,1fr) auto auto; align-items:center; gap:clamp(14px,3vw,32px); background:#161826; padding:20px 4px; transition:background .2s ease" style-hover="background:#1c1f31">
+        <button type="button" aria-label="נגן" style="width:42px; height:42px; border-radius:999px; border:1px solid color-mix(in srgb,#9184d9 55%, transparent); background:color-mix(in srgb,#9184d9 12%, transparent); color:#d2cefd; cursor:pointer; font-size:12px; transition:background .18s ease" style-hover="background:color-mix(in srgb,#9184d9 28%, transparent)">▶</button>
+        <div>
+          <p style="margin:0; font-size:16px; font-weight:400">Overflow 07 — Wedding Prime</p>
+          <p style="margin:5px 0 0; font-size:13px; font-weight:300; color:color-mix(in srgb,#e9e9ed 58%, transparent)">מזרחית · פופ ישראלי · להיטי לועזית</p>
+        </div>
+        <div style="display:flex; align-items:flex-end; gap:2px; height:20px">
+          <span style="display:block; width:2px; height:100%; background:#5d5294; transform-origin:bottom; animation:eq 1.3s ease-in-out infinite"></span>
+          <span style="display:block; width:2px; height:100%; background:#796cbf; transform-origin:bottom; animation:eq 1s ease-in-out .2s infinite"></span>
+          <span style="display:block; width:2px; height:100%; background:#5d5294; transform-origin:bottom; animation:eq 1.6s ease-in-out .1s infinite"></span>
+        </div>
+        <p style="margin:0; font-size:13px; font-weight:300; color:color-mix(in srgb,#e9e9ed 52%, transparent); font-feature-settings:'tnum' 1">1:04:22</p>
+      </div>
+      <div style="display:grid; grid-template-columns:auto minmax(0,1fr) auto auto; align-items:center; gap:clamp(14px,3vw,32px); background:#161826; padding:20px 4px; transition:background .2s ease" style-hover="background:#1c1f31">
+        <button type="button" aria-label="נגן" style="width:42px; height:42px; border-radius:999px; border:1px solid color-mix(in srgb,#9184d9 55%, transparent); background:color-mix(in srgb,#9184d9 12%, transparent); color:#d2cefd; cursor:pointer; font-size:12px; transition:background .18s ease" style-hover="background:color-mix(in srgb,#9184d9 28%, transparent)">▶</button>
+        <div>
+          <p style="margin:0; font-size:16px; font-weight:400">Basement Hours — House &amp; Techno</p>
+          <p style="margin:5px 0 0; font-size:13px; font-weight:300; color:color-mix(in srgb,#e9e9ed 58%, transparent)">האוס · טכנו · אפרו</p>
+        </div>
+        <div style="display:flex; align-items:flex-end; gap:2px; height:20px">
+          <span style="display:block; width:2px; height:100%; background:#5d5294; transform-origin:bottom; animation:eq 1.15s ease-in-out infinite"></span>
+          <span style="display:block; width:2px; height:100%; background:#796cbf; transform-origin:bottom; animation:eq 1.45s ease-in-out .25s infinite"></span>
+          <span style="display:block; width:2px; height:100%; background:#5d5294; transform-origin:bottom; animation:eq .95s ease-in-out .1s infinite"></span>
+        </div>
+        <p style="margin:0; font-size:13px; font-weight:300; color:color-mix(in srgb,#e9e9ed 52%, transparent); font-feature-settings:'tnum' 1">58:10</p>
+      </div>
+      <div style="display:grid; grid-template-columns:auto minmax(0,1fr) auto auto; align-items:center; gap:clamp(14px,3vw,32px); background:#161826; padding:20px 4px; transition:background .2s ease" style-hover="background:#1c1f31">
+        <button type="button" aria-label="נגן" style="width:42px; height:42px; border-radius:999px; border:1px solid color-mix(in srgb,#9184d9 55%, transparent); background:color-mix(in srgb,#9184d9 12%, transparent); color:#d2cefd; cursor:pointer; font-size:12px; transition:background .18s ease" style-hover="background:color-mix(in srgb,#9184d9 28%, transparent)">▶</button>
+        <div>
+          <p style="margin:0; font-size:16px; font-weight:400">Golden Hour — Lounge Opening</p>
+          <p style="margin:5px 0 0; font-size:13px; font-weight:300; color:color-mix(in srgb,#e9e9ed 58%, transparent)">ג'אז/לאונג' · רטרו 80-90</p>
+        </div>
+        <div style="display:flex; align-items:flex-end; gap:2px; height:20px">
+          <span style="display:block; width:2px; height:100%; background:#5d5294; transform-origin:bottom; animation:eq 1.5s ease-in-out infinite"></span>
+          <span style="display:block; width:2px; height:100%; background:#796cbf; transform-origin:bottom; animation:eq 1.1s ease-in-out .3s infinite"></span>
+          <span style="display:block; width:2px; height:100%; background:#5d5294; transform-origin:bottom; animation:eq 1.35s ease-in-out .15s infinite"></span>
+        </div>
+        <p style="margin:0; font-size:13px; font-weight:300; color:color-mix(in srgb,#e9e9ed 52%, transparent); font-feature-settings:'tnum' 1">42:47</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GALLERY ===== -->
+  <section id="gallery" style="max-width:1200px; margin:0 auto; padding:clamp(56px,8vh,96px) clamp(20px,5vw,72px)">
+    <p style="display:flex; align-items:center; gap:14px; margin:0 0 20px; font-size:12.5px; letter-spacing:.18em; text-transform:uppercase; color:#9184d9">
+      <span style="display:block; width:44px; height:1px; background:#9184d9"></span>גלריה
+    </p>
+    <h2 style="font-family:'Heebo',var(--font-heading); font-weight:300; font-size:clamp(26px,3.2vw,38px); line-height:1.22; letter-spacing:-.015em; margin:0 0 clamp(24px,4vh,44px)" data-comment-anchor="04625ddf1f-h2">מהרחבה עצמה.</h2>
+    <div style="display:grid; grid-template-columns:repeat(12,1fr); gap:clamp(10px,1.6vw,20px)">
+      <div data-depth="0.05" style="grid-column:span 7; will-change:transform">
+        <div style="mix-blend-mode:lighten; border-radius:10px; overflow:hidden">
+          <image-slot id="dj-gal-1" shape="rounded" radius="10" fit="cover" style="width:100%; aspect-ratio:3/2" placeholder="קהל מזווית ה־DJ"></image-slot>
+        </div>
+      </div>
+      <div data-depth="0.11" style="grid-column:span 5; will-change:transform">
+        <div style="mix-blend-mode:lighten; border-radius:10px; overflow:hidden">
+          <image-slot id="dj-gal-2" shape="rounded" radius="10" fit="cover" style="width:100%; aspect-ratio:4/5" placeholder="קלוז־אפ קונסולה"></image-slot>
+        </div>
+      </div>
+      <div data-depth="0.09" style="grid-column:span 5; will-change:transform">
+        <div style="mix-blend-mode:lighten; border-radius:10px; overflow:hidden">
+          <image-slot id="dj-gal-3" shape="rounded" radius="10" fit="cover" style="width:100%; aspect-ratio:1/1" placeholder="תאורה / עשן"></image-slot>
+        </div>
+      </div>
+      <div data-depth="0.04" style="grid-column:span 7; will-change:transform">
+        <div style="mix-blend-mode:lighten; border-radius:10px; overflow:hidden">
+          <image-slot id="dj-gal-4" shape="rounded" radius="10" fit="cover" style="width:100%; aspect-ratio:16/10" placeholder="רגע שיא באירוע"></image-slot>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TESTIMONIALS ===== -->
+  <section id="words" style="max-width:1200px; margin:0 auto; padding:clamp(56px,9vh,104px) clamp(20px,5vw,72px)">
+    <p style="display:flex; align-items:center; gap:14px; margin:0 0 clamp(28px,4vh,44px); font-size:12.5px; letter-spacing:.18em; text-transform:uppercase; color:#9184d9">
+      <span style="display:block; width:44px; height:1px; background:#9184d9"></span>המלצות
+    </p>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:clamp(24px,4vw,56px)">
+      <figure data-reveal="1" style="margin:0; opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease">
+        <blockquote style="font-family:'Heebo',var(--font-heading); font-weight:300; font-size:20px; line-height:1.55; letter-spacing:-.01em; margin:0; color:#e9e9ed" data-comment-anchor="c0664f944b-blockquote">״הרחבה לא התרוקנה מהשיר הראשון ועד שכיבו לנו את האורות באולם. גם ההורים נשארו.״</blockquote>
+        <figcaption style="margin:20px 0 0; font-size:13.5px; font-weight:300; color:color-mix(in srgb,#e9e9ed 60%, transparent)">— נועה ואיתי, חתונה, אחוזת בית</figcaption>
+      </figure>
+      <figure data-reveal="1" style="margin:0; opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease">
+        <blockquote style="font-family:'Heebo',var(--font-heading); font-weight:300; font-size:20px; line-height:1.55; letter-spacing:-.01em; margin:0; color:#e9e9ed">״הגיע שלוש שעות לפני, עשה סאונד־צ'ק, ועבד מול לוח הזמנים שלנו בלי הערה אחת. נדיר.״</blockquote>
+        <figcaption style="margin:20px 0 0; font-size:13.5px; font-weight:300; color:color-mix(in srgb,#e9e9ed 60%, transparent)">— טל ג׳., מפיקת אירועי חברה</figcaption>
+      </figure>
+      <figure data-reveal="1" style="margin:0; opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease">
+        <blockquote style="font-family:'Heebo',var(--font-heading); font-weight:300; font-size:20px; line-height:1.55; letter-spacing:-.01em; margin:0; color:#e9e9ed">״ביקשנו טכנו בשעה שתיים. קיבלנו טכנו בשעה שתיים. הבן שלי עוד מדבר על זה.״</blockquote>
+        <figcaption style="margin:20px 0 0; font-size:13.5px; font-weight:300; color:color-mix(in srgb,#e9e9ed 60%, transparent)">— רונן מ׳, בר מצווה, תל אביב</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ===== BOOKING CTA ===== -->
+  <section id="book" style="position:relative; overflow:hidden; background:radial-gradient(800px 380px at 85% -30%, color-mix(in srgb,#2b2741 88%, transparent), transparent 66%), #141623">
+    <div style="position:absolute; inset:0; pointer-events:none; background:linear-gradient(to left, color-mix(in srgb,#9184d9 7%, transparent), transparent 45%)"></div>
+    <div style="position:relative; max-width:1200px; margin:0 auto; padding:clamp(64px,10vh,120px) clamp(20px,5vw,72px); display:grid; grid-template-columns:minmax(0,1fr) auto; gap:32px; align-items:end">
+      <div>
+        <h2 style="font-family:'Heebo',var(--font-heading); font-weight:300; font-size:clamp(30px,4.2vw,54px); line-height:1.14; letter-spacing:-.02em; margin:0; max-width:22ch">
+          יש לכם תאריך.<br><span style="font-weight:500">בואו נסגור את הלילה.</span>
+        </h2>
+        <p style="margin:22px 0 0; max-width:48ch; font-size:15.5px; font-weight:300; line-height:1.7; color:color-mix(in srgb,#e9e9ed 74%, transparent)">
+          משאירים פרטים, חוזר אליכם עד 24 שעות עם זמינות והצעה. אין התחייבות בשלב הזה.
+        </p>
+      </div>
+      <button type="button" onClick="{{ openForm }}" style="font-family:inherit; font-size:15px; font-weight:400; letter-spacing:.03em; padding:16px 38px; color:#e7e5fe; background:color-mix(in srgb,#9184d9 14%, transparent); border:1px solid #9184d9; border-radius:8px; cursor:pointer; white-space:nowrap; transition:background .18s ease" style-hover="background:color-mix(in srgb,#9184d9 30%, transparent)">Book an event</button>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer style="border-top:1px solid color-mix(in srgb,#e9e9ed 10%, transparent)">
+    <div style="max-width:1200px; margin:0 auto; padding:clamp(36px,6vh,64px) clamp(20px,5vw,72px); display:flex; flex-wrap:wrap; gap:28px; align-items:center; justify-content:space-between">
+      <div>
+        <div style="display:flex; align-items:center; gap:14px">
+          <span aria-hidden="true" style="position:relative; display:grid; place-items:center; width:38px; height:38px">
+            <span style="position:absolute; width:38px; height:38px; border:1px solid #9184d9; border-radius:999px; animation:ring 2.6s cubic-bezier(.25,.6,.2,1) infinite"></span>
+            <span style="position:absolute; width:38px; height:38px; border:1px solid #796cbf; border-radius:999px; animation:ring 2.6s cubic-bezier(.25,.6,.2,1) .85s infinite"></span>
+            <span style="position:absolute; width:38px; height:38px; border:1px solid #5d5294; border-radius:999px; animation:ring 2.6s cubic-bezier(.25,.6,.2,1) 1.7s infinite"></span>
+            <span style="position:relative; width:9px; height:9px; border-radius:999px; background:#b5abfc; animation:pulse 1.3s ease-in-out infinite"></span>
+          </span>
+          <p style="margin:0; display:grid; gap:4px; font-family:'Heebo',var(--font-heading); text-transform:uppercase">
+            <span style="font-weight:200; font-size:10.5px; letter-spacing:.42em; line-height:1; color:color-mix(in srgb,#e9e9ed 55%, transparent)">DJ</span>
+            <span style="position:relative; font-weight:500; font-size:19px; letter-spacing:.2em; line-height:1">Overflow<span style="position:absolute; inset-inline:0; bottom:-6px; height:1px; background:linear-gradient(to left, color-mix(in srgb,#9184d9 0%, transparent), #9184d9 45%, color-mix(in srgb,#9184d9 0%, transparent))"></span></span>
+          </p>
+        </div>
+        <p style="margin:10px 0 0; font-size:13px; font-weight:300; color:color-mix(in srgb,#e9e9ed 55%, transparent)">DJ ומפיק מוזיקלי · פריסה ארצית · 052-000-0000</p>
+      </div>
+      <div style="display:flex; flex-wrap:wrap; gap:10px">
+        <a href="https://instagram.com" target="_blank" rel="noopener" style="font-size:13px; font-weight:300; padding:9px 16px; border:1px solid color-mix(in srgb,#e9e9ed 16%, transparent); border-radius:8px; color:color-mix(in srgb,#e9e9ed 78%, transparent); transition:border-color .18s ease" style-hover="border-color:color-mix(in srgb,#9184d9 60%, transparent); color:#e7e5fe">Instagram</a>
+        <a href="https://tiktok.com" target="_blank" rel="noopener" style="font-size:13px; font-weight:300; padding:9px 16px; border:1px solid color-mix(in srgb,#e9e9ed 16%, transparent); border-radius:8px; color:color-mix(in srgb,#e9e9ed 78%, transparent); transition:border-color .18s ease" style-hover="border-color:color-mix(in srgb,#9184d9 60%, transparent); color:#e7e5fe">TikTok</a>
+        <a href="https://open.spotify.com" target="_blank" rel="noopener" style="font-size:13px; font-weight:300; padding:9px 16px; border:1px solid color-mix(in srgb,#e9e9ed 16%, transparent); border-radius:8px; color:color-mix(in srgb,#e9e9ed 78%, transparent); transition:border-color .18s ease" style-hover="border-color:color-mix(in srgb,#9184d9 60%, transparent); color:#e7e5fe">Spotify</a>
+        <a href="https://wa.me/972520000000" target="_blank" rel="noopener" style="font-size:13px; font-weight:300; padding:9px 16px; border:1px solid color-mix(in srgb,#e9e9ed 16%, transparent); border-radius:8px; color:color-mix(in srgb,#e9e9ed 78%, transparent); transition:border-color .18s ease" style-hover="border-color:color-mix(in srgb,#9184d9 60%, transparent); color:#e7e5fe">WhatsApp</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== BOOKING MODAL ===== -->
+  <sc-if value="{{ open }}" hint-placeholder-val="{{ false }}">
+    <div dir="rtl" onClick="{{ backdropClick }}" style="position:fixed; inset:0; z-index:200; display:grid; place-items:center; padding:20px; background:color-mix(in srgb, black 62%, transparent); backdrop-filter:blur(6px); overflow-y:auto">
+      <div role="dialog" aria-modal="true" aria-label="תיאום אירוע" onClick="{{ stop }}" style="width:min(720px,100%); background:#1b1d2b; border:1px solid #3f424d; border-radius:14px; box-shadow:0 16px 40px rgba(0,0,0,.65); overflow:hidden; margin:auto">
+        <div style="display:flex; align-items:flex-start; gap:16px; padding:26px 28px 20px; border-bottom:1px solid color-mix(in srgb,#e9e9ed 10%, transparent)">
+          <div style="flex:1">
+            <p style="margin:0 0 8px; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#9184d9">Book an event</p>
+            <h3 style="font-family:'Heebo',var(--font-heading); font-weight:400; font-size:22px; margin:0">נשמח לשמוע על האירוע</h3>
+          </div>
+          <button type="button" aria-label="סגירה" onClick="{{ closeForm }}" style="width:34px; height:34px; border-radius:8px; border:1px solid color-mix(in srgb,#e9e9ed 16%, transparent); background:transparent; color:#e9e9ed; font-size:15px; cursor:pointer; transition:background .18s ease" style-hover="background:color-mix(in srgb,#e9e9ed 10%, transparent)">✕</button>
+        </div>
+
+        <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:44px 28px 52px; text-align:center">
+            <div style="width:52px; height:52px; margin:0 auto 20px; border-radius:999px; border:1px solid #9184d9; display:grid; place-items:center; color:#d2cefd; font-size:20px">✓</div>
+            <h4 style="font-family:'Heebo',var(--font-heading); font-weight:400; font-size:20px; margin:0">הפרטים נשלחו.</h4>
+            <p style="margin:12px auto 0; max-width:44ch; font-size:14.5px; font-weight:300; line-height:1.7; color:color-mix(in srgb,#e9e9ed 72%, transparent)">הפנייה נשלחה אל moshik@msbitsoftware.com. חוזר אליכם עד 24 שעות עם זמינות והצעה.</p>
+            <button type="button" onClick="{{ closeForm }}" style="margin-top:26px; font-family:inherit; font-size:14px; font-weight:400; padding:12px 28px; color:#e7e5fe; background:color-mix(in srgb,#9184d9 14%, transparent); border:1px solid #9184d9; border-radius:8px; cursor:pointer">סגירה</button>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+          <form onSubmit="{{ submit }}" style="padding:24px 28px 28px; display:grid; gap:18px">
+            <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px">
+              <label style="display:grid; gap:7px">
+                <span style="font-size:12.5px; font-weight:400; color:color-mix(in srgb,#e9e9ed 78%, transparent)">תאריך האירוע<span style="color:#e09a5b"> *</span></span>
+                <input name="date" type="date" required style="font-size:14px; padding:10px 12px; color:#e9e9ed; background:#232532; border:1px solid #3f424d; border-radius:8px; color-scheme:dark" data-comment-anchor="bb94e1e7fa-input">
+              </label>
+              <label style="display:grid; gap:7px">
+                <span style="font-size:12.5px; font-weight:400; color:color-mix(in srgb,#e9e9ed 78%, transparent)">סיבת האירוע<span style="color:#e09a5b"> *</span></span>
+                <select name="occasion" required style="font-size:14px; padding:10px 12px; color:#e9e9ed; background:#232532; border:1px solid #3f424d; border-radius:8px" data-comment-anchor="eee0cae2ca-select">
+                  <option value="">בחרו סוג אירוע</option>
+                  <option>חתונה</option>
+                  <option>בר / בת מצווה</option>
+                  <option>מסיבה פרטית</option>
+                  <option>אירוע חברה</option>
+                  <option>מועדון</option>
+                  <option>פסטיבל</option>
+                  <option>אחר</option>
+                </select>
+              </label>
+              <label style="display:grid; gap:7px">
+                <span style="font-size:12.5px; font-weight:400; color:color-mix(in srgb,#e9e9ed 78%, transparent)">משך האירוע<span style="color:#e09a5b"> *</span></span>
+                <select name="duration" required style="font-size:14px; padding:10px 12px; color:#e9e9ed; background:#232532; border:1px solid #3f424d; border-radius:8px" data-comment-anchor="0b5ca2e01f-select">
+                  <option value="">בחרו משך</option>
+                  <option>עד 2 שעות</option>
+                  <option>3 שעות</option>
+                  <option>4 שעות</option>
+                  <option>5 שעות</option>
+                  <option>6 שעות ומעלה</option>
+                </select>
+              </label>
+              <label style="display:grid; gap:7px">
+                <span style="font-size:12.5px; font-weight:400; color:color-mix(in srgb,#e9e9ed 78%, transparent)">יישוב האירוע<span style="color:#e09a5b"> *</span></span>
+                <input name="city" type="text" required placeholder="לדוגמה: רמת גן" style="font-size:14px; padding:10px 12px; color:#e9e9ed; background:#232532; border:1px solid #3f424d; border-radius:8px">
+              </label>
+            </div>
+
+            <fieldset style="border:0; padding:0; margin:2px 0 0">
+              <legend style="padding:0; margin:0 0 4px; font-size:12.5px; font-weight:400; color:color-mix(in srgb,#e9e9ed 78%, transparent)" data-comment-anchor="9e01e01c05-legend">איזה סוג מוזיקה תרצו לשמוע באירוע?</legend>
+              <p style="margin:0 0 12px; font-size:12px; font-weight:300; color:color-mix(in srgb,#e9e9ed 50%, transparent)">סמנו כמה שתרצו — הסט נבנה סביב הבחירה</p>
+              <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(132px,1fr)); gap:9px">
+                <sc-for list="{{ genreTiles }}" as="g" hint-placeholder-count="11">
+                  <label style="{{ g.style }}">
+                    <input type="checkbox" name="genres" value="{{ g.name }}" checked="{{ g.on }}" onChange="{{ g.toggle }}" style="position:absolute; opacity:0; width:1px; height:1px; margin:0; pointer-events:none">
+                    <span style="{{ g.dot }}"></span>
+                    <span style="font-size:14px; font-weight:300; line-height:1.3">{{ g.name }}</span>
+                  </label>
+                </sc-for>
+              </div>
+            </fieldset>
+
+            <label style="display:grid; gap:7px">
+              <span style="font-size:12.5px; font-weight:400; color:color-mix(in srgb,#e9e9ed 78%, transparent)">תיאור נוסף</span>
+              <textarea name="notes" rows="3" placeholder="מספר אורחים, שעת התחלה, שירים שחייבים, דרישות סאונד..." style="font-size:14px; font-weight:300; line-height:1.6; padding:11px 12px; color:#e9e9ed; background:#232532; border:1px solid #3f424d; border-radius:8px; resize:vertical"></textarea>
+            </label>
+
+            <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px">
+              <label style="display:grid; gap:7px">
+                <span style="font-size:12.5px; font-weight:400; color:color-mix(in srgb,#e9e9ed 78%, transparent)">שם מלא<span style="color:#e09a5b"> *</span></span>
+                <input name="name" type="text" required style="font-size:14px; padding:10px 12px; color:#e9e9ed; background:#232532; border:1px solid #3f424d; border-radius:8px" data-comment-anchor="5320cf441e-input">
+              </label>
+              <label style="display:grid; gap:7px" data-comment-anchor="a5b4f6453a-label">
+                <span style="font-size:12.5px; font-weight:400; color:color-mix(in srgb,#e9e9ed 78%, transparent)">טלפון<span style="color:#e09a5b"> *</span></span>
+                <input name="phone" type="tel" required style="font-size:14px; padding:10px 12px; color:#e9e9ed; background:#232532; border:1px solid #3f424d; border-radius:8px">
+              </label>
+            </div>
+
+            <div style="display:flex; flex-wrap:wrap; align-items:center; gap:14px; margin-top:2px">
+              <button type="submit" style="font-family:inherit; font-size:14.5px; font-weight:400; letter-spacing:.03em; padding:13px 32px; color:#e7e5fe; background:color-mix(in srgb,#9184d9 14%, transparent); border:1px solid #9184d9; border-radius:8px; cursor:pointer; transition:background .18s ease" style-hover="background:color-mix(in srgb,#9184d9 30%, transparent)">שליחת הפרטים</button>
+              <p style="margin:0; font-size:12.5px; font-weight:300; color:color-mix(in srgb,#e9e9ed 52%, transparent)">הפרטים נשלחים אל moshik@msbitsoftware.com</p>
+            </div>
+          </form>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;parallaxIntensity&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:0.55,&quot;min&quot;:0,&quot;max&quot;:2,&quot;step&quot;:0.05,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;תנועה&quot;},&quot;formEmail&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;moshik@msbitsoftware.com&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;טופס&quot;}}">
+class Component extends DCLogic {
+  static GENRES = ['מזרחית', 'היפ הופ', 'טכנו', 'האוס', 'פופ ישראלי', 'להיטי לועזית', 'רטרו 80-90', 'אפרו/לטין', 'טראנס', 'רגאטון', "ג'אז/לאונג'"];
+
+  state = { open: false, sent: false, picked: [] };
+
+  toggleGenre = (name) => this.setState((s) => ({
+    picked: s.picked.includes(name) ? s.picked.filter((g) => g !== name) : s.picked.concat(name)
+  }));
+
+  genreTiles() {
+    // amber selection — the one warm note against the blurple ground
+    const AMBER = '#e09a5b';
+    return Component.GENRES.map((name) => {
+      const on = this.state.picked.includes(name);
+      return {
+        name, on,
+        toggle: () => this.toggleGenre(name),
+        style: 'position:relative; display:flex; align-items:center; gap:9px; min-height:48px;'
+          + ' padding:11px 13px; border-radius:8px; cursor:pointer; user-select:none;'
+          + ' transition:background .16s ease, border-color .16s ease, color .16s ease;'
+          + (on
+            ? ' background:color-mix(in srgb,' + AMBER + ' 17%, transparent); border:1px solid ' + AMBER + '; color:#f4d3b2;'
+            : ' background:#232532; border:1px solid #3f424d; color:color-mix(in srgb,#e9e9ed 82%, transparent);'),
+        dot: 'flex:none; width:16px; height:16px; border-radius:5px; display:block;'
+          + ' transition:background .16s ease, border-color .16s ease, box-shadow .16s ease;'
+          + (on
+            ? ' background:' + AMBER + '; border:1px solid ' + AMBER + '; box-shadow:inset 0 0 0 2px #1b1d2b;'
+            : ' background:transparent; border:1px solid #595d6c;')
+      };
+    });
+  }
+
+  heroCanvas = (el) => { this._cv = el; if (el) this.startScene(); };
+
+  startScene() {
+    const cv = this._cv;
+    if (!cv || this._scene) return;
+    const ctx = cv.getContext('2d');
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const bpm = this.props.bpm ?? 124;
+    const density = this.props.crowdDensity ?? 1;
+    let W = 0, H = 0, dpr = 1;
+
+    const rand = (seed) => { const x = Math.sin(seed * 12.9898) * 43758.5453; return x - Math.floor(x); };
+    const N = Math.round(150 * density);
+    // four depth rows, nearest last — crowd seen from behind the console
+    const people = Array.from({ length: N }, (_, i) => {
+      const row = i % 4;
+      return {
+        row,
+        x: rand(i + 1),
+        j: rand(i + 7.3),                    // bob phase
+        s: 0.72 + rand(i + 3.1) * 0.6,       // scale jitter
+        arms: rand(i + 11.7) > 0.52,
+        sway: 0.4 + rand(i + 5.5) * 0.9
+      };
+    }).sort((a, b) => a.row - b.row);
+
+    const beams = [
+      { x: 0.17, hue: '#b5abfc', w: 0.055, sp: 0.21, ph: 0.0, a: 0.34 },
+      { x: 0.36, hue: '#9184d9', w: 0.038, sp: 0.31, ph: 1.9, a: 0.30 },
+      { x: 0.62, hue: '#d2cefd', w: 0.030, sp: 0.26, ph: 3.4, a: 0.26 },
+      { x: 0.83, hue: '#796cbf', w: 0.062, sp: 0.17, ph: 5.1, a: 0.30 }
+    ];
+    const dust = Array.from({ length: 70 }, (_, i) => ({
+      x: rand(i + 21), y: rand(i + 33), r: 0.4 + rand(i + 41) * 1.5,
+      sp: 0.006 + rand(i + 51) * 0.02, ph: rand(i + 61) * 6.28
+    }));
+
+    const resize = () => {
+      dpr = Math.min(devicePixelRatio || 1, 2);
+      W = cv.clientWidth; H = cv.clientHeight;
+      cv.width = Math.max(1, Math.round(W * dpr));
+      cv.height = Math.max(1, Math.round(H * dpr));
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+
+    const figure = (p, t, beat) => {
+      const depth = [0.30, 0.48, 0.70, 1.0][p.row];
+      const base = H * (0.995 - p.row * 0.045);
+      const h = H * 0.30 * depth * p.s;                       // shoulder height
+      const drift = Math.sin(t * 0.11 + p.j * 6.28) * W * 0.012 * depth;
+      const x = p.x * W * 1.06 - W * 0.03 + drift;
+      const bob = Math.abs(Math.sin(beat * Math.PI + p.j * 6.28)) * h * 0.075 * p.sway;
+      const lean = Math.sin(t * 0.9 + p.j * 6.28) * 0.10 * p.sway;
+      const y = base - h + bob;
+      const bw = h * 0.42;
+      const ink = ['#1b1e2e', '#151726', '#0f111c', '#090a12'][p.row];
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(lean * 0.12);
+      ctx.fillStyle = ink;
+      ctx.beginPath();                                        // torso
+      ctx.moveTo(-bw * 0.55, h);
+      ctx.quadraticCurveTo(-bw * 0.62, h * 0.30, -bw * 0.34, h * 0.20);
+      ctx.quadraticCurveTo(0, h * 0.06, bw * 0.34, h * 0.20);
+      ctx.quadraticCurveTo(bw * 0.62, h * 0.30, bw * 0.55, h);
+      ctx.closePath();
+      ctx.fill();
+      ctx.beginPath();                                        // head
+      ctx.ellipse(0, -h * 0.02, bw * 0.22, bw * 0.26, 0, 0, 6.2832);
+      ctx.fill();
+      if (p.arms) {                                           // hands up
+        const a = Math.sin(beat * Math.PI * 0.5 + p.j * 6.28) * 0.5;
+        ctx.lineWidth = bw * 0.16; ctx.lineCap = 'round'; ctx.strokeStyle = ink;
+        ctx.beginPath();
+        ctx.moveTo(-bw * 0.34, h * 0.26);
+        ctx.lineTo(-bw * (0.62 + a * 0.14), -h * (0.34 + a * 0.10));
+        ctx.moveTo(bw * 0.34, h * 0.26);
+        ctx.lineTo(bw * (0.60 - a * 0.12), -h * (0.30 + a * 0.12));
+        ctx.stroke();
+      }
+      ctx.restore();
+    };
+
+    const draw = (ts) => {
+      const t = reduce ? 8 : ts / 1000;
+      const beat = t * (bpm / 60);
+      const hit = Math.pow(1 - (beat % 1), 6);                // kick envelope
+      if (!W || !H) resize();
+
+      const g = ctx.createLinearGradient(0, 0, 0, H);
+      g.addColorStop(0, '#14162a'); g.addColorStop(0.55, '#161826'); g.addColorStop(1, '#0d0e18');
+      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+
+      ctx.globalCompositeOperation = 'lighter';
+      const halo = ctx.createRadialGradient(W * 0.5, H * 0.28, 0, W * 0.5, H * 0.28, W * 0.62);
+      halo.addColorStop(0, 'rgba(91,79,150,' + (0.16 + hit * 0.16).toFixed(3) + ')');
+      halo.addColorStop(1, 'rgba(91,79,150,0)');
+      ctx.fillStyle = halo; ctx.fillRect(0, 0, W, H);
+
+      for (const b of beams) {                                // moving light beams
+        const ang = Math.sin(t * b.sp + b.ph) * 0.40;
+        const ox = b.x * W + Math.cos(t * b.sp * 0.7 + b.ph) * W * 0.06;
+        const oy = -H * 0.12;
+        const len = H * 1.35;
+        const w0 = W * b.w * 0.16, w1 = W * b.w * (2.1 + hit * 0.5);
+        ctx.save();
+        ctx.translate(ox, oy);
+        ctx.rotate(ang);
+        const lg = ctx.createLinearGradient(0, 0, 0, len);
+        const a = b.a * (0.62 + hit * 0.55);
+        lg.addColorStop(0, b.hue + Math.round(a * 255).toString(16).padStart(2, '0'));
+        lg.addColorStop(0.55, b.hue + Math.round(a * 90).toString(16).padStart(2, '0'));
+        lg.addColorStop(1, b.hue + '00');
+        ctx.fillStyle = lg;
+        ctx.beginPath();
+        ctx.moveTo(-w0, 0); ctx.lineTo(w0, 0); ctx.lineTo(w1, len); ctx.lineTo(-w1, len);
+        ctx.closePath(); ctx.fill();
+        ctx.restore();
+      }
+
+      for (const d of dust) {                                 // haze motes
+        const y = ((d.y - t * d.sp) % 1 + 1) % 1;
+        const x = d.x * W + Math.sin(t * 0.5 + d.ph) * W * 0.02;
+        ctx.fillStyle = 'rgba(210,206,253,' + (0.05 + 0.16 * Math.abs(Math.sin(t + d.ph))).toFixed(3) + ')';
+        ctx.beginPath(); ctx.arc(x, y * H * 0.92, d.r, 0, 6.2832); ctx.fill();
+      }
+      ctx.globalCompositeOperation = 'source-over';
+
+      for (const p of people) figure(p, t, beat);             // the crowd, back to front
+
+      const floor = ctx.createLinearGradient(0, H * 0.62, 0, H);
+      floor.addColorStop(0, 'rgba(13,14,24,0)'); floor.addColorStop(1, 'rgba(9,10,18,0.92)');
+      ctx.fillStyle = floor; ctx.fillRect(0, H * 0.62, W, H * 0.38);
+
+      if (!reduce) this._raf = requestAnimationFrame(draw);
+    };
+
+    resize();
+    this._onResize = () => resize();
+    addEventListener('resize', this._onResize);
+    this._scene = true;
+    this._raf = requestAnimationFrame(draw);
+  }
+
+  componentDidMount() {
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduce) {
+      const k = this.props.parallaxIntensity ?? 0.55;
+      const els = () => Array.from(document.querySelectorAll('[data-depth]'));
+      let list = els(), queued = false;
+      const apply = () => {
+        queued = false;
+        const vh = innerHeight;
+        for (const el of list) {
+          const r = el.getBoundingClientRect();
+          if (r.bottom < -300 || r.top > vh + 300) continue;
+          const off = (r.top + r.height / 2 - vh / 2) / vh;
+          el.style.transform = 'translate3d(0,' + (off * (+el.dataset.depth) * 100 * k).toFixed(2) + 'px,0)';
+        }
+      };
+      this._onScroll = () => { if (!queued) { queued = true; requestAnimationFrame(apply); } };
+      addEventListener('scroll', this._onScroll, { passive: true });
+      addEventListener('resize', this._onScroll);
+      this._retime = setTimeout(() => { list = els(); apply(); }, 400);
+      apply();
+    }
+    this._io = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        if (!e.isIntersecting) continue;
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'none';
+        this._io.unobserve(e.target);
+      }
+    }, { threshold: 0.18 });
+    document.querySelectorAll('[data-reveal]').forEach((el) => this._io.observe(el));
+    this._onKey = (e) => { if (e.key === 'Escape' && this.state.open) this.closeForm(); };
+    addEventListener('keydown', this._onKey);
+  }
+
+  componentWillUnmount() {
+    if (this._onScroll) { removeEventListener('scroll', this._onScroll); removeEventListener('resize', this._onScroll); }
+    clearTimeout(this._retime);
+    removeEventListener('keydown', this._onKey);
+    if (this._io) this._io.disconnect();
+    cancelAnimationFrame(this._raf);
+    if (this._onResize) removeEventListener('resize', this._onResize);
+    document.body.style.overflow = '';
+  }
+
+  openForm = () => { this.setState({ open: true, sent: false, picked: [] }); document.body.style.overflow = 'hidden'; };
+  closeForm = () => { this.setState({ open: false }); document.body.style.overflow = ''; };
+  backdropClick = (e) => { if (e.target === e.currentTarget) this.closeForm(); };
+  stop = (e) => e.stopPropagation();
+
+  submit = (e) => {
+    e.preventDefault();
+    const fd = new FormData(e.target);
+    const genres = this.state.picked.join(', ');
+    const to = this.props.formEmail ?? 'moshik@msbitsoftware.com';
+    const body = [
+      'שם: ' + (fd.get('name') || ''),
+      'טלפון: ' + (fd.get('phone') || ''),
+      'תאריך: ' + (fd.get('date') || ''),
+      'סיבת האירוע: ' + (fd.get('occasion') || ''),
+      'משך: ' + (fd.get('duration') || ''),
+      'יישוב: ' + (fd.get('city') || ''),
+      'ז\u05B4אנרים: ' + genres,
+      '',
+      (fd.get('notes') || '')
+    ].join('\n');
+    this._mailto = 'mailto:' + to + '?subject=' + encodeURIComponent('פנייה חדשה לאירוע — DJ Overflow') + '&body=' + encodeURIComponent(body);
+    this.setState({ sent: true });
+  };
+
+  renderVals() {
+    return {
+      genreTiles: this.genreTiles(),
+      open: this.state.open,
+      sent: this.state.sent,
+      notSent: !this.state.sent,
+      openForm: this.openForm,
+      closeForm: this.closeForm,
+      backdropClick: this.backdropClick,
+      stop: this.stop,
+      submit: this.submit
+    };
+  }
+}
+</script>
+</body>
+</html>
