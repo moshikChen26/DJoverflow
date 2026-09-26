@@ -30,6 +30,11 @@ module.exports = async (req, res) => {
     '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
   }[c]));
 
+  const formatDate = (iso) => {
+    const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || '');
+    return m ? `${m[3]}/${m[2]}/${m[1]}` : (iso || '—');
+  };
+
   const textBody = [
     'שם: ' + name,
     'טלפון: ' + phone,
@@ -42,7 +47,61 @@ module.exports = async (req, res) => {
     (notes || '')
   ].join('\n');
 
-  const htmlBody = '<pre style="font-family:inherit;white-space:pre-wrap">' + escapeHtml(textBody) + '</pre>';
+  const fieldRow = (label, value) => `
+        <tr>
+          <td style="padding:11px 0;border-bottom:1px solid #292b31;font-size:12px;color:#9397ab;width:120px;vertical-align:top;white-space:nowrap;">${escapeHtml(label)}</td>
+          <td style="padding:11px 0 11px 16px;border-bottom:1px solid #292b31;font-size:14px;color:#e9e9ed;vertical-align:top;">${escapeHtml(value) || '—'}</td>
+        </tr>`;
+
+  const rows = [
+    fieldRow('שם מלא', name),
+    fieldRow('טלפון', phone),
+    fieldRow('תאריך האירוע', formatDate(date)),
+    fieldRow('סיבת האירוע', occasion),
+    fieldRow('משך האירוע', duration),
+    fieldRow('יישוב', city),
+    genres ? fieldRow('זִאנרים', genres) : ''
+  ].join('');
+
+  const notesSection = notes ? `
+          <tr>
+            <td style="padding:22px 32px 28px;">
+              <p style="margin:0 0 8px;font-size:11px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:#9184d9;">תיאור נוסף</p>
+              <p style="margin:0;font-size:14px;line-height:1.7;color:#e9e9ed;white-space:pre-wrap;">${escapeHtml(notes)}</p>
+            </td>
+          </tr>` : '';
+
+  const htmlBody = `<!doctype html>
+<html dir="rtl" lang="he">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#0d0e18;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#0d0e18;padding:32px 16px;">
+    <tr>
+      <td align="center">
+        <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="max-width:560px;width:100%;background:#1b1d2b;border:1px solid #3f424d;border-radius:14px;overflow:hidden;font-family:Arial,Helvetica,sans-serif;">
+          <tr>
+            <td style="padding:26px 32px 20px;border-bottom:1px solid #3f424d;">
+              <p style="margin:0 0 6px;font-size:11px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;color:#9184d9;">DJ Overflow</p>
+              <h1 style="margin:0;font-size:20px;line-height:1.3;color:#e9e9ed;font-weight:600;">פנייה חדשה לאירוע</h1>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:8px 32px 4px;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${rows}
+              </table>
+            </td>
+          </tr>${notesSection}
+          <tr>
+            <td style="padding:18px 32px 24px;border-top:1px solid #3f424d;">
+              <p style="margin:0;font-size:12px;color:#75798c;">נשלח אוטומטית מטופס "תיאום אירוע" באתר DJ Overflow</p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
 
   try {
     const resendRes = await fetch('https://api.resend.com/emails', {
