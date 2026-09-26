@@ -103,20 +103,24 @@ module.exports = async (req, res) => {
 </body>
 </html>`;
 
+  // Raw email headers are 7-bit ASCII only (RFC 5322); a non-ASCII Subject must be
+  // MIME encoded-word wrapped (RFC 2047) or relays/clients replace it with '?'.
+  const encodeSubject = (s) => '=?UTF-8?B?' + Buffer.from(s, 'utf8').toString('base64') + '?=';
+
   try {
     const resendRes = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${RESEND_API_KEY}`,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json; charset=utf-8'
       },
-      body: JSON.stringify({
+      body: Buffer.from(JSON.stringify({
         from: FROM_EMAIL,
         to: [TO_EMAIL],
-        subject: 'פנייה חדשה לאירוע — DJ Overflow',
+        subject: encodeSubject('פנייה חדשה לאירוע — DJ Overflow'),
         text: textBody,
         html: htmlBody
-      })
+      }), 'utf8')
     });
 
     if (!resendRes.ok) {
