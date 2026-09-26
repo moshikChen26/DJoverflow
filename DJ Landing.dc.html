@@ -95,7 +95,6 @@
     <div class="nav-links-desktop" style="display:flex; align-items:center; gap:22px; margin-inline-start:auto; font-size:13.5px; font-weight:300; color:color-mix(in srgb, #e9e9ed 72%, transparent)">
       <a href="#about" style="color:inherit">אודות</a>
       <a href="#events" style="color:inherit">סוגי אירועים</a>
-      <a href="#sets" style="color:inherit">סטים</a>
       <a href="#gallery" style="color:inherit">גלריה</a>
       <a href="#words" style="color:inherit">המלצות</a>
       <button type="button" onClick="{{ openForm }}" style="font-family:inherit; font-size:13px; font-weight:400; letter-spacing:.04em; padding:8px 18px; color:#c9c2f2; background:transparent; border:1px solid color-mix(in srgb, #9184d9 62%, transparent); border-radius:8px; cursor:pointer; transition:background .18s ease, color .18s ease" style-hover="background:color-mix(in srgb, #9184d9 16%, transparent); color:#e7e5fe">תיאום אירוע</button>
@@ -107,7 +106,6 @@
     <div class="nav-mobile-panel" dir="rtl">
       <a href="#about" onClick="{{ closeMobileNav }}">אודות</a>
       <a href="#events" onClick="{{ closeMobileNav }}">סוגי אירועים</a>
-      <a href="#sets" onClick="{{ closeMobileNav }}">סטים</a>
       <a href="#gallery" onClick="{{ closeMobileNav }}">גלריה</a>
       <a href="#words" onClick="{{ closeMobileNav }}">המלצות</a>
       <button type="button" class="nav-cta-mobile" onClick="{{ openForm }}">תיאום אירוע</button>
@@ -137,7 +135,6 @@
       </p>
       <div style="display:flex; flex-wrap:wrap; align-items:center; gap:12px; margin-top:32px">
         <button type="button" onClick="{{ openForm }}" style="font-family:inherit; font-size:14.5px; font-weight:400; letter-spacing:.03em; padding:13px 30px; color:#e7e5fe; background:color-mix(in srgb, #9184d9 12%, transparent); border:1px solid #9184d9; border-radius:8px; cursor:pointer; transition:background .18s ease" style-hover="background:color-mix(in srgb, #9184d9 26%, transparent)">להשארת פרטים לאירוע</button>
-        <a href="#sets" style="font-size:14.5px; font-weight:300; padding:13px 22px; color:color-mix(in srgb,#e9e9ed 80%, transparent); border:1px solid color-mix(in srgb,#e9e9ed 16%, transparent); border-radius:8px; transition:border-color .18s ease" style-hover="border-color:color-mix(in srgb,#e9e9ed 34%, transparent); color:#e9e9ed">להאזנה לסטים</a>
         <div style="display:flex; align-items:flex-end; gap:3px; height:26px; margin-inline-start:10px">
           <span style="display:block; width:2px; height:100%; background:#9184d9; transform-origin:bottom; animation:eq 1.1s ease-in-out infinite"></span>
           <span style="display:block; width:2px; height:100%; background:#9184d9; transform-origin:bottom; animation:eq 1.4s ease-in-out .15s infinite"></span>
@@ -236,60 +233,6 @@
         <h3 style="font-family:'Heebo',var(--font-heading); font-weight:400; font-size:19px; margin:14px 0 0">פסטיבלים</h3>
         <p style="margin:12px 0 0; font-size:14.5px; font-weight:300; line-height:1.7; color:color-mix(in srgb,#e9e9ed 70%, transparent)">עבודה מול צוותי הפקה ובמה, כולל תיאום טכני, שעות סאונד־צ'ק ורשימת דרישות מלאה.</p>
       </article>
-    </div>
-  </section>
-
-  <!-- ===== SETS ===== -->
-  <section id="sets" style="max-width:1200px; margin:0 auto; padding:clamp(56px,8vh,96px) clamp(20px,5vw,72px)">
-    <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:24px; flex-wrap:wrap; margin-bottom:clamp(24px,4vh,40px)">
-      <div>
-        <p style="display:flex; align-items:center; gap:14px; margin:0 0 20px; font-size:12.5px; letter-spacing:.18em; text-transform:uppercase; color:#9184d9">
-          <span style="display:block; width:44px; height:1px; background:#9184d9"></span>סטים לשמיעה
-        </p>
-        <h2 style="font-family:'Heebo',var(--font-heading); font-weight:300; font-size:clamp(26px,3.2vw,38px); line-height:1.22; letter-spacing:-.015em; margin:0">קחו דקה. תשמעו איך זה נשמע.</h2>
-      </div>
-      <a href="https://open.spotify.com" target="_blank" rel="noopener" style="font-size:13.5px; font-weight:300; padding:11px 20px; color:color-mix(in srgb,#e9e9ed 80%, transparent); border:1px solid color-mix(in srgb,#e9e9ed 16%, transparent); border-radius:8px; transition:border-color .18s ease" style-hover="border-color:color-mix(in srgb,#e9e9ed 34%, transparent); color:#e9e9ed">כל הסטים ב־Spotify</a>
-    </div>
-    <div style="display:grid; gap:1px; background:color-mix(in srgb,#e9e9ed 10%, transparent)">
-      <div style="display:grid; grid-template-columns:auto minmax(0,1fr) auto auto; align-items:center; gap:clamp(14px,3vw,32px); background:#161826; padding:20px 4px; transition:background .2s ease" style-hover="background:#1c1f31">
-        <button type="button" aria-label="נגן" style="width:42px; height:42px; border-radius:999px; border:1px solid color-mix(in srgb,#9184d9 55%, transparent); background:color-mix(in srgb,#9184d9 12%, transparent); color:#d2cefd; cursor:pointer; font-size:12px; transition:background .18s ease" style-hover="background:color-mix(in srgb,#9184d9 28%, transparent)">▶</button>
-        <div>
-          <p style="margin:0; font-size:16px; font-weight:400">Overflow 07: Wedding Prime</p>
-          <p style="margin:5px 0 0; font-size:13px; font-weight:300; color:color-mix(in srgb,#e9e9ed 58%, transparent)">מזרחית · פופ ישראלי · להיטי לועזית</p>
-        </div>
-        <div style="display:flex; align-items:flex-end; gap:2px; height:20px">
-          <span style="display:block; width:2px; height:100%; background:#5d5294; transform-origin:bottom; animation:eq 1.3s ease-in-out infinite"></span>
-          <span style="display:block; width:2px; height:100%; background:#796cbf; transform-origin:bottom; animation:eq 1s ease-in-out .2s infinite"></span>
-          <span style="display:block; width:2px; height:100%; background:#5d5294; transform-origin:bottom; animation:eq 1.6s ease-in-out .1s infinite"></span>
-        </div>
-        <p style="margin:0; font-size:13px; font-weight:300; color:color-mix(in srgb,#e9e9ed 52%, transparent); font-feature-settings:'tnum' 1">1:04:22</p>
-      </div>
-      <div style="display:grid; grid-template-columns:auto minmax(0,1fr) auto auto; align-items:center; gap:clamp(14px,3vw,32px); background:#161826; padding:20px 4px; transition:background .2s ease" style-hover="background:#1c1f31">
-        <button type="button" aria-label="נגן" style="width:42px; height:42px; border-radius:999px; border:1px solid color-mix(in srgb,#9184d9 55%, transparent); background:color-mix(in srgb,#9184d9 12%, transparent); color:#d2cefd; cursor:pointer; font-size:12px; transition:background .18s ease" style-hover="background:color-mix(in srgb,#9184d9 28%, transparent)">▶</button>
-        <div>
-          <p style="margin:0; font-size:16px; font-weight:400">Basement Hours: House &amp; Techno</p>
-          <p style="margin:5px 0 0; font-size:13px; font-weight:300; color:color-mix(in srgb,#e9e9ed 58%, transparent)">האוס · טכנו · אפרו</p>
-        </div>
-        <div style="display:flex; align-items:flex-end; gap:2px; height:20px">
-          <span style="display:block; width:2px; height:100%; background:#5d5294; transform-origin:bottom; animation:eq 1.15s ease-in-out infinite"></span>
-          <span style="display:block; width:2px; height:100%; background:#796cbf; transform-origin:bottom; animation:eq 1.45s ease-in-out .25s infinite"></span>
-          <span style="display:block; width:2px; height:100%; background:#5d5294; transform-origin:bottom; animation:eq .95s ease-in-out .1s infinite"></span>
-        </div>
-        <p style="margin:0; font-size:13px; font-weight:300; color:color-mix(in srgb,#e9e9ed 52%, transparent); font-feature-settings:'tnum' 1">58:10</p>
-      </div>
-      <div style="display:grid; grid-template-columns:auto minmax(0,1fr) auto auto; align-items:center; gap:clamp(14px,3vw,32px); background:#161826; padding:20px 4px; transition:background .2s ease" style-hover="background:#1c1f31">
-        <button type="button" aria-label="נגן" style="width:42px; height:42px; border-radius:999px; border:1px solid color-mix(in srgb,#9184d9 55%, transparent); background:color-mix(in srgb,#9184d9 12%, transparent); color:#d2cefd; cursor:pointer; font-size:12px; transition:background .18s ease" style-hover="background:color-mix(in srgb,#9184d9 28%, transparent)">▶</button>
-        <div>
-          <p style="margin:0; font-size:16px; font-weight:400">Golden Hour: Lounge Opening</p>
-          <p style="margin:5px 0 0; font-size:13px; font-weight:300; color:color-mix(in srgb,#e9e9ed 58%, transparent)">ג'אז/לאונג' · רטרו 80-90</p>
-        </div>
-        <div style="display:flex; align-items:flex-end; gap:2px; height:20px">
-          <span style="display:block; width:2px; height:100%; background:#5d5294; transform-origin:bottom; animation:eq 1.5s ease-in-out infinite"></span>
-          <span style="display:block; width:2px; height:100%; background:#796cbf; transform-origin:bottom; animation:eq 1.1s ease-in-out .3s infinite"></span>
-          <span style="display:block; width:2px; height:100%; background:#5d5294; transform-origin:bottom; animation:eq 1.35s ease-in-out .15s infinite"></span>
-        </div>
-        <p style="margin:0; font-size:13px; font-weight:300; color:color-mix(in srgb,#e9e9ed 52%, transparent); font-feature-settings:'tnum' 1">42:47</p>
-      </div>
     </div>
   </section>
 
