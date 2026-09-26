@@ -351,7 +351,7 @@
           <div style="padding:44px 28px 52px; text-align:center">
             <div style="width:52px; height:52px; margin:0 auto 20px; border-radius:999px; border:1px solid #9184d9; display:grid; place-items:center; color:#d2cefd; font-size:20px">✓</div>
             <h4 style="font-family:'Heebo',var(--font-heading); font-weight:400; font-size:20px; margin:0">הפרטים נשלחו.</h4>
-            <p style="margin:12px auto 0; max-width:44ch; font-size:14.5px; font-weight:300; line-height:1.7; color:color-mix(in srgb,#e9e9ed 72%, transparent)">הפנייה נשלחה אל moshik@msbitsoftware.com. חוזר אליכם עד 24 שעות עם זמינות והצעה.</p>
+            <p style="margin:12px auto 0; max-width:44ch; font-size:14.5px; font-weight:300; line-height:1.7; color:color-mix(in srgb,#e9e9ed 72%, transparent)">הפרטים נשלחו בהצלחה. חוזר אליכם עד 24 שעות עם זמינות והצעה.</p>
             <button type="button" onClick="{{ closeForm }}" style="margin-top:26px; font-family:inherit; font-size:14px; font-weight:400; padding:12px 28px; color:#e7e5fe; background:color-mix(in srgb,#9184d9 14%, transparent); border:1px solid #9184d9; border-radius:8px; cursor:pointer">סגירה</button>
           </div>
         </sc-if>
@@ -425,7 +425,6 @@
 
             <div style="display:flex; flex-wrap:wrap; align-items:center; gap:14px; margin-top:2px">
               <button type="submit" style="font-family:inherit; font-size:14.5px; font-weight:400; letter-spacing:.03em; padding:13px 32px; color:#e7e5fe; background:color-mix(in srgb,#9184d9 14%, transparent); border:1px solid #9184d9; border-radius:8px; cursor:pointer; transition:background .18s ease" style-hover="background:color-mix(in srgb,#9184d9 30%, transparent)">שליחת הפרטים</button>
-              <p style="margin:0; font-size:12.5px; font-weight:300; color:color-mix(in srgb,#e9e9ed 52%, transparent)">הפרטים נשלחים אל moshik@msbitsoftware.com</p>
             </div>
           </form>
         </sc-if>
@@ -678,6 +677,7 @@ class Component extends DCLogic {
       (fd.get('notes') || '')
     ].join('\n');
     this._mailto = 'mailto:' + to + '?subject=' + encodeURIComponent('פנייה חדשה לאירוע — DJ Overflow') + '&body=' + encodeURIComponent(body);
+    window.location.href = this._mailto;
     this.setState({ sent: true });
   };
 
