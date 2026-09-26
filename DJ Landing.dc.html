@@ -69,6 +69,10 @@
     .stat-grid { grid-template-columns: repeat(2,1fr) !important; row-gap: 28px !important; }
     .gallery-grid > div { grid-column: span 12 !important; }
   }
+  @media (max-width: 700px) {
+    .about-grid { grid-template-columns: 1fr !important; }
+    .about-figure { order: -1; }
+  }
 </style>
 </helmet>
 
@@ -146,8 +150,8 @@
   </section>
 
   <!-- ===== ABOUT ===== -->
-  <section id="about" style="max-width:1200px; margin:0 auto; padding:clamp(72px,11vh,132px) clamp(20px,5vw,72px) clamp(48px,7vh,88px); display:grid; grid-template-columns:minmax(0,7fr) minmax(0,5fr); gap:clamp(28px,5vw,80px); align-items:center">
-    <div data-reveal="1" style="opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease">
+  <section id="about" class="about-grid" style="max-width:1200px; margin:0 auto; padding:clamp(72px,11vh,132px) clamp(20px,5vw,72px) clamp(48px,7vh,88px); display:grid; grid-template-columns:minmax(0,7fr) minmax(0,5fr); gap:clamp(28px,5vw,80px); align-items:center">
+    <div class="about-text" data-reveal="1" style="opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease">
       <p style="display:flex; align-items:center; gap:14px; margin:0 0 20px; font-size:12.5px; letter-spacing:.18em; text-transform:uppercase; color:#9184d9">
         <span style="display:block; width:44px; height:1px; background:#9184d9"></span>אודות
       </p>
@@ -165,7 +169,7 @@
         <span style="font-size:12.5px; font-weight:300; padding:6px 13px; border-radius:999px; color:#d2cefd; background:color-mix(in srgb,#9184d9 14%, transparent); border:1px solid color-mix(in srgb,#9184d9 30%, transparent)">פריסה ארצית</span>
       </div>
     </div>
-    <figure data-depth="0.06" style="margin:0; position:relative; will-change:transform">
+    <figure class="about-figure" data-depth="0.06" style="margin:0; position:relative; will-change:transform">
       <div style="mix-blend-mode:lighten; border-radius:14px; overflow:hidden">
         <image-slot id="dj-portrait" shape="rounded" radius="14" fit="cover" style="width:100%; aspect-ratio:4/5" placeholder="פורטרט על רקע כהה"></image-slot>
       </div>
