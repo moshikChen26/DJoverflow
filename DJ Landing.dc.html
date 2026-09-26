@@ -34,6 +34,41 @@
   @keyframes cue { 0%,100% { transform: translateY(0); opacity: .45 } 50% { transform: translateY(7px); opacity: 1 } }
   @media (prefers-reduced-motion: reduce) { * { animation: none !important } }
   @media (max-width: 440px) { .hero-line2 { white-space: normal !important; } }
+
+  .nav-burger {
+    display: none; align-items: center; justify-content: center;
+    width: 38px; height: 38px; margin-inline-start: auto; flex: none;
+    background: transparent; border: 1px solid color-mix(in srgb, #e9e9ed 20%, transparent);
+    border-radius: 8px; color: #e9e9ed; font-size: 16px; line-height: 1; cursor: pointer;
+  }
+  .nav-mobile-panel { display: none; }
+  @media (max-width: 860px) {
+    .nav-links-desktop { display: none !important; }
+    .nav-burger { display: flex; }
+    .nav-mobile-panel {
+      display: flex; flex-direction: column;
+      position: fixed; inset-inline: 0; top: 64px; z-index: 59;
+      background: #161826; border-bottom: 1px solid color-mix(in srgb, #e9e9ed 10%, transparent);
+      box-shadow: 0 14px 28px rgba(0,0,0,.4);
+      padding: 6px clamp(20px,5vw,72px) 22px;
+      max-height: calc(100vh - 64px); overflow-y: auto;
+    }
+    .nav-mobile-panel a {
+      padding: 15px 0; font-size: 15px; font-weight: 300; color: #e9e9ed;
+      border-bottom: 1px solid color-mix(in srgb, #e9e9ed 8%, transparent);
+    }
+    .nav-cta-mobile {
+      margin-top: 18px; width: 100%; font-family: inherit; font-size: 14.5px; font-weight: 400;
+      padding: 13px 18px; color: #e7e5fe; background: color-mix(in srgb, #9184d9 14%, transparent);
+      border: 1px solid #9184d9; border-radius: 8px; cursor: pointer;
+    }
+  }
+  @media (min-width: 861px) { .nav-mobile-panel { display: none !important; } }
+
+  @media (max-width: 640px) {
+    .stat-grid { grid-template-columns: repeat(2,1fr) !important; row-gap: 28px !important; }
+    .gallery-grid > div { grid-column: span 12 !important; }
+  }
 </style>
 </helmet>
 
@@ -52,7 +87,7 @@
         <span style="position:relative; font-weight:500; font-size:15px; letter-spacing:.2em; line-height:1">Overflow<span style="position:absolute; inset-inline:0; bottom:-5px; height:1px; background:linear-gradient(to left, color-mix(in srgb,#9184d9 0%, transparent), #9184d9 45%, color-mix(in srgb,#9184d9 0%, transparent))"></span></span>
       </span>
     </a>
-    <div style="display:flex; align-items:center; gap:22px; margin-inline-start:auto; font-size:13.5px; font-weight:300; color:color-mix(in srgb, #e9e9ed 72%, transparent)">
+    <div class="nav-links-desktop" style="display:flex; align-items:center; gap:22px; margin-inline-start:auto; font-size:13.5px; font-weight:300; color:color-mix(in srgb, #e9e9ed 72%, transparent)">
       <a href="#about" style="color:inherit">אודות</a>
       <a href="#events" style="color:inherit">סוגי אירועים</a>
       <a href="#sets" style="color:inherit">סטים</a>
@@ -60,7 +95,19 @@
       <a href="#words" style="color:inherit">המלצות</a>
       <button type="button" onClick="{{ openForm }}" style="font-family:inherit; font-size:13px; font-weight:400; letter-spacing:.04em; padding:8px 18px; color:#c9c2f2; background:transparent; border:1px solid color-mix(in srgb, #9184d9 62%, transparent); border-radius:8px; cursor:pointer; transition:background .18s ease, color .18s ease" style-hover="background:color-mix(in srgb, #9184d9 16%, transparent); color:#e7e5fe">תיאום אירוע</button>
     </div>
+    <button type="button" class="nav-burger" onClick="{{ toggleMobileNav }}" aria-label="תפריט">{{ navIcon }}</button>
   </nav>
+
+  <sc-if value="{{ mobileNavOpen }}" hint-placeholder-val="{{ false }}">
+    <div class="nav-mobile-panel" dir="rtl">
+      <a href="#about" onClick="{{ closeMobileNav }}">אודות</a>
+      <a href="#events" onClick="{{ closeMobileNav }}">סוגי אירועים</a>
+      <a href="#sets" onClick="{{ closeMobileNav }}">סטים</a>
+      <a href="#gallery" onClick="{{ closeMobileNav }}">גלריה</a>
+      <a href="#words" onClick="{{ closeMobileNav }}">המלצות</a>
+      <button type="button" class="nav-cta-mobile" onClick="{{ openForm }}">תיאום אירוע</button>
+    </div>
+  </sc-if>
 
   <!-- ===== HERO ===== -->
   <section id="top" style="position:relative; min-height:calc(100vh - 64px); display:grid; align-items:end; overflow:hidden; isolation:isolate">
@@ -127,7 +174,7 @@
 
   <!-- ===== STAT BAND ===== -->
   <section aria-label="במספרים" style="background:radial-gradient(900px 420px at 15% -40%, color-mix(in srgb,#353b80 68%, transparent), transparent 64%), #262a60">
-    <div style="max-width:1200px; margin:0 auto; padding:clamp(44px,7vh,80px) clamp(20px,5vw,72px); display:grid; grid-template-columns:repeat(4,auto); justify-content:space-between; gap:36px 28px">
+    <div class="stat-grid" style="max-width:1200px; margin:0 auto; padding:clamp(44px,7vh,80px) clamp(20px,5vw,72px); display:grid; grid-template-columns:repeat(4,auto); justify-content:space-between; gap:36px 28px">
       <div>
         <p style="font-family:'Heebo',var(--font-heading); font-weight:300; font-size:clamp(34px,3.6vw,52px); line-height:1.1; margin:0; color:#e9e9ed; font-feature-settings:'tnum' 1">800+</p>
         <p style="margin:12px 0 0; font-size:12.5px; letter-spacing:.16em; text-transform:uppercase; color:color-mix(in srgb,#e9e9ed 66%, transparent)">אירועים</p>
@@ -247,7 +294,7 @@
       <span style="display:block; width:44px; height:1px; background:#9184d9"></span>גלריה
     </p>
     <h2 style="font-family:'Heebo',var(--font-heading); font-weight:300; font-size:clamp(26px,3.2vw,38px); line-height:1.22; letter-spacing:-.015em; margin:0 0 clamp(24px,4vh,44px)" data-comment-anchor="04625ddf1f-h2">מהרחבה עצמה.</h2>
-    <div style="display:grid; grid-template-columns:repeat(12,1fr); gap:clamp(10px,1.6vw,20px)">
+    <div class="gallery-grid" style="display:grid; grid-template-columns:repeat(12,1fr); gap:clamp(10px,1.6vw,20px)">
       <div data-depth="0.05" style="grid-column:span 7; will-change:transform">
         <div style="mix-blend-mode:lighten; border-radius:10px; overflow:hidden">
           <image-slot id="dj-gal-1" shape="rounded" radius="10" fit="cover" style="width:100%; aspect-ratio:3/2" placeholder="קהל מזווית ה־DJ"></image-slot>
@@ -437,7 +484,7 @@
 class Component extends DCLogic {
   static GENRES = ['מזרחית', 'היפ הופ', 'טכנו', 'האוס', 'פופ ישראלי', 'להיטי לועזית', 'רטרו 80-90', 'אפרו/לטין', 'טראנס', 'רגאטון', "ג'אז/לאונג'"];
 
-  state = { open: false, sent: false, sending: false, picked: [] };
+  state = { open: false, sent: false, sending: false, picked: [], mobileNavOpen: false };
 
   toggleGenre = (name) => this.setState((s) => ({
     picked: s.picked.includes(name) ? s.picked.filter((g) => g !== name) : s.picked.concat(name)
@@ -655,9 +702,11 @@ class Component extends DCLogic {
     document.body.style.overflow = '';
   }
 
-  openForm = () => { this.setState({ open: true, sent: false, picked: [] }); document.body.style.overflow = 'hidden'; };
+  openForm = () => { this.setState({ open: true, sent: false, picked: [], mobileNavOpen: false }); document.body.style.overflow = 'hidden'; };
   closeForm = () => { this.setState({ open: false }); document.body.style.overflow = ''; };
   backdropClick = (e) => { if (e.target === e.currentTarget) this.closeForm(); };
+  toggleMobileNav = () => this.setState((s) => ({ mobileNavOpen: !s.mobileNavOpen }));
+  closeMobileNav = () => this.setState({ mobileNavOpen: false });
   stop = (e) => e.stopPropagation();
 
   submit = (e) => {
@@ -696,11 +745,15 @@ class Component extends DCLogic {
       notSent: !this.state.sent,
       sending: this.state.sending,
       submitLabel: this.state.sending ? 'שולח…' : 'שליחת הפרטים',
+      mobileNavOpen: this.state.mobileNavOpen,
+      navIcon: this.state.mobileNavOpen ? '✕' : '☰',
       openForm: this.openForm,
       closeForm: this.closeForm,
       backdropClick: this.backdropClick,
       stop: this.stop,
-      submit: this.submit
+      submit: this.submit,
+      toggleMobileNav: this.toggleMobileNav,
+      closeMobileNav: this.closeMobileNav
     };
   }
 }
