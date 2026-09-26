@@ -300,26 +300,41 @@
     </p>
     <h2 style="font-family:'Heebo',var(--font-heading); font-weight:300; font-size:clamp(26px,3.2vw,38px); line-height:1.22; letter-spacing:-.015em; margin:0 0 clamp(24px,4vh,44px)" data-comment-anchor="04625ddf1f-h2">מהרחבה עצמה.</h2>
     <div class="gallery-grid" style="display:grid; grid-template-columns:repeat(12,1fr); gap:clamp(10px,1.6vw,20px)">
-      <div data-depth="0.05" style="grid-column:span 4; will-change:transform">
-        <div style="mix-blend-mode:lighten; border-radius:10px; overflow:hidden">
-          <image-slot id="dj-gal-1" shape="rounded" radius="10" fit="cover" style="width:100%; aspect-ratio:4/3"></image-slot>
-        </div>
-      </div>
-      <div data-depth="0.09" style="grid-column:span 4; will-change:transform">
-        <div style="mix-blend-mode:lighten; border-radius:10px; overflow:hidden">
-          <image-slot id="dj-gal-4" shape="rounded" radius="10" fit="cover" style="width:100%; aspect-ratio:4/3"></image-slot>
-        </div>
-      </div>
-      <div data-depth="0.11" style="grid-column:span 4; will-change:transform">
+      <div data-depth="0.05" style="grid-column:span 6; will-change:transform">
         <div style="mix-blend-mode:lighten; border-radius:10px; overflow:hidden">
           <image-slot id="dj-gal-5" shape="rounded" radius="10" fit="cover" style="width:100%; aspect-ratio:4/3"></image-slot>
         </div>
       </div>
-      <div style="grid-column:span 12">
-        <video src="uploads/dancefloor-clip.mp4" controls="{{ true }}" playsInline="{{ true }}" preload="metadata" style="width:100%; max-height:70vh; border-radius:10px; background:#000; display:block; margin:0 auto"></video>
+      <div data-depth="0.09" style="grid-column:span 6; will-change:transform">
+        <div style="mix-blend-mode:lighten; border-radius:10px; overflow:hidden">
+          <image-slot id="dj-gal-6" shape="rounded" radius="10" fit="cover" style="width:100%; aspect-ratio:4/3"></image-slot>
+        </div>
       </div>
       <div style="grid-column:span 12">
-        <video src="uploads/garden-party-clip.mp4" controls="{{ true }}" playsInline="{{ true }}" preload="metadata" style="width:100%; max-height:70vh; border-radius:10px; background:#000; display:block; margin:0 auto"></video>
+        <sc-if value="{{ playing1 }}" hint-placeholder-val="{{ false }}">
+          <video src="uploads/dancefloor-clip.mp4" controls="{{ true }}" autoPlay="{{ true }}" playsInline="{{ true }}" style="width:100%; max-height:70vh; border-radius:10px; background:#000; display:block; margin:0 auto"></video>
+        </sc-if>
+        <sc-if value="{{ notPlaying1 }}" hint-placeholder-val="{{ true }}">
+          <button type="button" onClick="{{ playVideo1 }}" aria-label="נגן וידאו" style="position:relative; width:100%; aspect-ratio:16/9; border:0; padding:0; cursor:pointer; background-image:url('uploads/dancefloor-clip-poster.jpg'); background-size:cover; background-position:center; border-radius:10px; overflow:hidden; display:block">
+            <span style="position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,.4), rgba(0,0,0,.05)); transition:background .2s ease" style-hover="background:linear-gradient(to top, rgba(0,0,0,.25), rgba(0,0,0,.02))"></span>
+            <span style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:72px; height:72px; border-radius:999px; background:color-mix(in srgb,#161826 55%, transparent); border:1px solid color-mix(in srgb,#e9e9ed 40%, transparent); display:grid; place-items:center; backdrop-filter:blur(4px); transition:border-color .2s ease, background .2s ease" style-hover="border-color:#9184d9; background:color-mix(in srgb,#9184d9 40%, transparent)">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="#e9e9ed" style="margin-inline-start:3px"><path d="M8 5v14l11-7z"></path></svg>
+            </span>
+          </button>
+        </sc-if>
+      </div>
+      <div style="grid-column:span 12">
+        <sc-if value="{{ playing2 }}" hint-placeholder-val="{{ false }}">
+          <video src="uploads/garden-party-clip.mp4" controls="{{ true }}" autoPlay="{{ true }}" playsInline="{{ true }}" style="width:100%; max-height:70vh; border-radius:10px; background:#000; display:block; margin:0 auto"></video>
+        </sc-if>
+        <sc-if value="{{ notPlaying2 }}" hint-placeholder-val="{{ true }}">
+          <button type="button" onClick="{{ playVideo2 }}" aria-label="נגן וידאו" style="position:relative; width:100%; aspect-ratio:16/9; border:0; padding:0; cursor:pointer; background-image:url('uploads/garden-party-clip-poster.jpg'); background-size:cover; background-position:center; border-radius:10px; overflow:hidden; display:block">
+            <span style="position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,.4), rgba(0,0,0,.05)); transition:background .2s ease" style-hover="background:linear-gradient(to top, rgba(0,0,0,.25), rgba(0,0,0,.02))"></span>
+            <span style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:72px; height:72px; border-radius:999px; background:color-mix(in srgb,#161826 55%, transparent); border:1px solid color-mix(in srgb,#e9e9ed 40%, transparent); display:grid; place-items:center; backdrop-filter:blur(4px); transition:border-color .2s ease, background .2s ease" style-hover="border-color:#9184d9; background:color-mix(in srgb,#9184d9 40%, transparent)">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="#e9e9ed" style="margin-inline-start:3px"><path d="M8 5v14l11-7z"></path></svg>
+            </span>
+          </button>
+        </sc-if>
       </div>
     </div>
   </section>
@@ -490,7 +505,7 @@
 class Component extends DCLogic {
   static GENRES = ['מזרחית', 'היפ הופ', 'טכנו', 'האוס', 'פופ ישראלי', 'להיטי לועזית', 'רטרו 80-90', 'אפרו/לטין', 'טראנס', 'רגאטון', "ג'אז/לאונג'"];
 
-  state = { open: false, sent: false, sending: false, picked: [], mobileNavOpen: false };
+  state = { open: false, sent: false, sending: false, picked: [], mobileNavOpen: false, playing1: false, playing2: false };
 
   toggleGenre = (name) => this.setState((s) => ({
     picked: s.picked.includes(name) ? s.picked.filter((g) => g !== name) : s.picked.concat(name)
@@ -713,6 +728,8 @@ class Component extends DCLogic {
   backdropClick = (e) => { if (e.target === e.currentTarget) this.closeForm(); };
   toggleMobileNav = () => this.setState((s) => ({ mobileNavOpen: !s.mobileNavOpen }));
   closeMobileNav = () => this.setState({ mobileNavOpen: false });
+  playVideo1 = () => this.setState({ playing1: true });
+  playVideo2 = () => this.setState({ playing2: true });
   stop = (e) => e.stopPropagation();
 
   submit = (e) => {
@@ -759,7 +776,13 @@ class Component extends DCLogic {
       stop: this.stop,
       submit: this.submit,
       toggleMobileNav: this.toggleMobileNav,
-      closeMobileNav: this.closeMobileNav
+      closeMobileNav: this.closeMobileNav,
+      playing1: this.state.playing1,
+      notPlaying1: !this.state.playing1,
+      playing2: this.state.playing2,
+      notPlaying2: !this.state.playing2,
+      playVideo1: this.playVideo1,
+      playVideo2: this.playVideo2
     };
   }
 }
