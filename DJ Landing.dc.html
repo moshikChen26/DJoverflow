@@ -675,6 +675,45 @@ class Component extends DCLogic {
   playVideo2 = () => this.setState({ playing2: true });
   stop = (e) => e.stopPropagation();
 
+  validate = (payload) => {
+    const hasLetter = /[A-Za-zא-ת]/;
+
+    const name = payload.name.trim();
+    if (name.length < 2 || !hasLetter.test(name)) {
+      return 'נא להזין שם מלא תקין.';
+    }
+
+    if (!payload.date) {
+      return 'נא לבחור תאריך לאירוע.';
+    }
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const chosenDate = new Date(payload.date + 'T00:00:00');
+    if (isNaN(chosenDate.getTime()) || chosenDate < today) {
+      return 'תאריך האירוע לא תקין. יש לבחור תאריך מהיום והלאה.';
+    }
+
+    if (!payload.occasion) {
+      return 'נא לבחור סיבת אירוע.';
+    }
+    if (!payload.duration) {
+      return 'נא לבחור משך אירוע.';
+    }
+
+    const city = payload.city.trim();
+    if (city.length < 2 || !hasLetter.test(city)) {
+      return 'נא להזין שם יישוב תקין.';
+    }
+
+    const phoneDigits = payload.phone.trim().replace(/[\s-]/g, '').replace(/^\+?972/, '0');
+    const validPhone = /^(05\d{8}|07\d{8}|0[23489]\d{7})$/.test(phoneDigits);
+    if (!validPhone) {
+      return 'מספר הטלפון אינו תקין. יש להזין מספר נייד (למשל 050-1234567) או מספר קווי (למשל 03-1234567).';
+    }
+
+    return null;
+  };
+
   submit = (e) => {
     e.preventDefault();
     const fd = new FormData(e.target);
@@ -689,6 +728,13 @@ class Component extends DCLogic {
       genres,
       notes: fd.get('notes') || ''
     };
+
+    const validationError = this.validate(payload);
+    if (validationError) {
+      alert(validationError);
+      return;
+    }
+
     this.setState({ sending: true });
     fetch('/api/send', {
       method: 'POST',
