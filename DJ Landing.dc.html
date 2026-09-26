@@ -424,7 +424,7 @@
             </div>
 
             <div style="display:flex; flex-wrap:wrap; align-items:center; gap:14px; margin-top:2px">
-              <button type="submit" style="font-family:inherit; font-size:14.5px; font-weight:400; letter-spacing:.03em; padding:13px 32px; color:#e7e5fe; background:color-mix(in srgb,#9184d9 14%, transparent); border:1px solid #9184d9; border-radius:8px; cursor:pointer; transition:background .18s ease" style-hover="background:color-mix(in srgb,#9184d9 30%, transparent)">שליחת הפרטים</button>
+              <button type="submit" disabled="{{ sending }}" style="font-family:inherit; font-size:14.5px; font-weight:400; letter-spacing:.03em; padding:13px 32px; color:#e7e5fe; background:color-mix(in srgb,#9184d9 14%, transparent); border:1px solid #9184d9; border-radius:8px; cursor:pointer; transition:background .18s ease" style-hover="background:color-mix(in srgb,#9184d9 30%, transparent)">{{ submitLabel }}</button>
             </div>
           </form>
         </sc-if>
@@ -437,7 +437,7 @@
 class Component extends DCLogic {
   static GENRES = ['מזרחית', 'היפ הופ', 'טכנו', 'האוס', 'פופ ישראלי', 'להיטי לועזית', 'רטרו 80-90', 'אפרו/לטין', 'טראנס', 'רגאטון', "ג'אז/לאונג'"];
 
-  state = { open: false, sent: false, picked: [] };
+  state = { open: false, sent: false, sending: false, picked: [] };
 
   toggleGenre = (name) => this.setState((s) => ({
     picked: s.picked.includes(name) ? s.picked.filter((g) => g !== name) : s.picked.concat(name)
@@ -664,21 +664,28 @@ class Component extends DCLogic {
     e.preventDefault();
     const fd = new FormData(e.target);
     const genres = this.state.picked.join(', ');
-    const to = this.props.formEmail ?? 'moshik@msbitsoftware.com';
-    const body = [
-      'שם: ' + (fd.get('name') || ''),
-      'טלפון: ' + (fd.get('phone') || ''),
-      'תאריך: ' + (fd.get('date') || ''),
-      'סיבת האירוע: ' + (fd.get('occasion') || ''),
-      'משך: ' + (fd.get('duration') || ''),
-      'יישוב: ' + (fd.get('city') || ''),
-      'ז\u05B4אנרים: ' + genres,
-      '',
-      (fd.get('notes') || '')
-    ].join('\n');
-    this._mailto = 'mailto:' + to + '?subject=' + encodeURIComponent('פנייה חדשה לאירוע — DJ Overflow') + '&body=' + encodeURIComponent(body);
-    window.location.href = this._mailto;
-    this.setState({ sent: true });
+    const payload = {
+      name: fd.get('name') || '',
+      phone: fd.get('phone') || '',
+      date: fd.get('date') || '',
+      occasion: fd.get('occasion') || '',
+      duration: fd.get('duration') || '',
+      city: fd.get('city') || '',
+      genres,
+      notes: fd.get('notes') || ''
+    };
+    this.setState({ sending: true });
+    fetch('/api/send', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+      .then((res) => { if (!res.ok) throw new Error('send failed'); })
+      .then(() => this.setState({ sent: true, sending: false }))
+      .catch(() => {
+        this.setState({ sending: false });
+        alert('משהו השתבש בשליחת הפרטים. אפשר לנסות שוב בעוד רגע.');
+      });
   };
 
   renderVals() {
@@ -687,6 +694,8 @@ class Component extends DCLogic {
       open: this.state.open,
       sent: this.state.sent,
       notSent: !this.state.sent,
+      sending: this.state.sending,
+      submitLabel: this.state.sending ? 'שולח…' : 'שליחת הפרטים',
       openForm: this.openForm,
       closeForm: this.closeForm,
       backdropClick: this.backdropClick,
