@@ -32,7 +32,7 @@ module.exports = async (req, res) => {
 
   const formatDate = (iso) => {
     const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || '');
-    return m ? `${m[3]}/${m[2]}/${m[1]}` : (iso || '—');
+    return m ? `${m[3]}/${m[2]}/${m[1]}` : (iso || '-');
   };
 
   const textBody = [
@@ -50,7 +50,7 @@ module.exports = async (req, res) => {
   const fieldRow = (label, value) => `
         <tr>
           <td style="padding:11px 0;border-bottom:1px solid #292b31;font-size:12px;color:#9397ab;width:120px;vertical-align:top;white-space:nowrap;">${escapeHtml(label)}</td>
-          <td style="padding:11px 0 11px 16px;border-bottom:1px solid #292b31;font-size:14px;color:#e9e9ed;vertical-align:top;">${escapeHtml(value) || '—'}</td>
+          <td style="padding:11px 0 11px 16px;border-bottom:1px solid #292b31;font-size:14px;color:#e9e9ed;vertical-align:top;">${escapeHtml(value) || '-'}</td>
         </tr>`;
 
   const rows = [
@@ -117,7 +117,7 @@ module.exports = async (req, res) => {
       body: Buffer.from(JSON.stringify({
         from: FROM_EMAIL,
         to: [TO_EMAIL],
-        subject: encodeSubject('פנייה חדשה לאירוע — DJ Overflow'),
+        subject: encodeSubject('פנייה חדשה לאירוע'),
         text: textBody,
         html: htmlBody
       }), 'utf8')
